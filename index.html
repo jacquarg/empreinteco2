@@ -5,10 +5,27 @@
     <title>Revenus</title>
     <script src="./scripts/vendors/jquery-3.4.0.min.js"></script>
     <script src="./scripts/vendors/plotly-latest.min.js"></script>
+    <script src="./data/ravijen_2017.jsonld.js"></script>
   </head>
 <body>
-  <h2>Mon score CO2 : <span id="monTotal"></span></h2>
-   
+  <!--h2>Mon score CO2 : <span id="monTotal"></span></h2-->
+  <h2>Total <span id="monTotal"></span>TeqCO2. Objectif : 2TeqCO2.</h2>
+    <!-- https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France -->
+  <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Catégorie</th>
+        <th>Journalière</th>
+        <th>Mensuelle</th>
+        <th>Annuelle</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
   <script src="./scripts/main.js"></script>
 </body>
 </html>

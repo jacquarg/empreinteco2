@@ -1,5 +1,6 @@
-{
+var data = {
   alimentation: { // 2 353 kg
+    label: "alimentation",
 		boissons: { // 263 kg
 			boissonsAlcoolisees: 145,
 			boissonsSansAlcool: 118,
@@ -28,6 +29,7 @@
 },
 // Biens de consommations			2 626 kg
 	biens: {
+    label: "biens",
 		habillement: 763,
 
 	// Autres Biens et Services			1 716 kg
@@ -37,6 +39,7 @@
 	usageInternet: 146,
 },
 	transports: {
+    label: "transports",
 		voiture: {
 			voitureAchat: 424,
 			voitureUsage: 1548
@@ -47,9 +50,10 @@
 },
 
 // Services			1 489 kg
-	servicePublicsSante: 1489,
+	servicePublicsSante: { label: "servicePublicsSante", tous: 1489} ,
 
 logement: {
+  label: "logement",
 	fluides: {
 		gaz: 654,
 		pp: 498, // ??
