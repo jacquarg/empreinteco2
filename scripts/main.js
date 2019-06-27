@@ -1,6 +1,22 @@
+const personalize = () => {
+  var userData = {}
+  $.extend(true, userData, refData)
+  $.extend(true, userData, myData)
+  return userData
+}
 
+const workTransports = () => {
+  var tc = myData.typicalWorkDay * 200
+  const prorata = 200 / 365
+  $.extend(myData.transports, {
+    voiture: {
+      voitureUsage: refData.transports.voiture.voitureUsage * prorata
+    },
+    transportCommun: refData.transports.transportCommun * prorata + tc , // trainsBus: 85,
+  })
+}
 
-const computeCategories = () => {
+const computeCategories = (data) => {
   Object.values(data).forEach(v => {
     v.total = computeCategory(v)
     v.totalDaily = Math.floor(v.total / 365)
@@ -34,58 +50,80 @@ const computeCategory = (cat) => {
 // }
 // return agg
 
-const displayTable = () => {
-  const buildCatRow = (cat) => {
+const displayTable = (userD, refD) => {
+  const buildCatRow = (catD, catR) => {
     return `<tr>
-    <th>${cat.label}</th>
-    <td>${cat.today}</td>
-    <td>${cat.totalDaily}</td>
-    <td>${cat.totalMonthly}</td>
-    <td>${cat.total}</td>
+    <th>${catD.label}</th>
+    <td>${catD.today} / ${catR.today}</td>
+    <td>${catD.totalDaily} / ${catR.totalDaily}</td>
+    <td>${catD.totalMonthly} / ${catR.totalMonthly}</td>
+    <td>${catD.total} / ${catR.total}</td>
     </tr>
     `
   }
 
+  const totalCat = (total, label) => { return {
+    label: label,
+    total: total,
+    today: Math.floor(total / 365),
+    totalDaily: Math.floor(total / 365),
+    totalMonthly: Math.floor(total / 12),
+  }
+}
+
   $("tbody").empty()
 
-  $("tbody").append(buildCatRow({ label: "objectif",
-    total: 2000,
-    today: Math.floor(2000 / 365),
-    totalDaily: Math.floor(2000 / 365),
-    totalMonthly: Math.floor(2000 / 12),
+  $("tbody").append(buildCatRow(totalCat(2000, "objectif"), totalCat(Object.values(refD).reduce((agg, it) => agg + it.total, 0), "objectif")))
 
-  }))
+  $("tbody").append(buildCatRow(totalCat(Object.values(userD).reduce((agg, it) => agg + it.total, 0), "Total"), totalCat(Object.values(refD).reduce((agg, it) => agg + it.total, 0), "Total")))
 
-  $("tbody").append(buildCatRow({ label: "Total",
-    total: Object.values(data).reduce((agg, it) => agg + it.total, 0),
-    today: Object.values(data).reduce((agg, it) => agg + it.today, 0),
-    totalDaily: Object.values(data).reduce((agg, it) => agg + it.totalDaily, 0),
-    totalMonthly: Object.values(data).reduce((agg, it) => agg + it.totalMonthly, 0),
-   }))
+  //
+  // $("tbody").append(buildCatRow({ label: "objectif",
+  //   total: 2000,
+  //   today: Math.floor(2000 / 365),
+  //   totalDaily: Math.floor(2000 / 365),
+  //   totalMonthly: Math.floor(2000 / 12),
+  // }))
 
-  Object.values(data).forEach(it => {
-    $("tbody").append(buildCatRow(it))
+  // $("tbody").append(buildCatRow({ label: "Total",
+  //   total: Object.values(data).reduce((agg, it) => agg + it.total, 0),
+  //   today: Object.values(data).reduce((agg, it) => agg + it.today, 0),
+  //   totalDaily: Object.values(data).reduce((agg, it) => agg + it.totalDaily, 0),
+  //   totalMonthly: Object.values(data).reduce((agg, it) => agg + it.totalMonthly, 0),
+  //  }))
+
+  Object.keys(userD).forEach(it => {
+    $("tbody").append(buildCatRow(userD[it], refD[it]))
   })
 }
 
-
-const main = () => {
-  attachEvents()
-  computeCategories()
-  // var res = computeCategories()
-
+const displayPie = (data, divId) => {
   var display = {
     labels: Object.keys(data).sort(), //res.map(it => it[0]),
     //values: Object.keysres.map(it => it[1]),
     type: "pie",
   }
   display.values = display.labels.map(it => data[it].total)
-  Plotly.newPlot('myDiv', [display], { height: 500, width: 500 })
+  Plotly.newPlot(divId, [display], { height: 500, width: 500 })
+}
 
-  const total = Object.values(data).reduce((agg, it) => agg + it.total, 0)
+const main = () => {
+  attachEvents()
+
+  workTransports()
+
+  const userData = personalize()
+  computeCategories(userData)
+  computeCategories(refData)
+  // var res = computeCategories()
+  displayPie(refData, 'ref')
+  displayPie(userData, 'my')
+
+
+  const total = Object.values(myData).reduce((agg, it) => agg + it.total, 0)
   $('#monTotal').text(total)
 
-  displayTable()
+  displayTable(userData, refData)
 }
 
 const setTodayValue = (d) => {

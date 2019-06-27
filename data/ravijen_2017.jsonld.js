@@ -1,4 +1,4 @@
-var data = {
+var refData = {
   alimentation: { // 2 353 kg
     label: "alimentation",
 		boissons: { // 263 kg

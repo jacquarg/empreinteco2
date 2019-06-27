@@ -15,3 +15,10 @@
 
 * journée typique (travail) <-- transport, ...
 * conso énergie <-- d'après facture ... ?
+
+
+# WTF ?
+
+* Mesurer l'impact de mes choix
+* Prioriser l'effort
+* Inspiration pour réduire.
