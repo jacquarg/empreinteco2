@@ -107,28 +107,9 @@ const displayPie = (data, divId) => {
   Plotly.newPlot(divId, [display], { height: 500, width: 500 })
 }
 
-const main = () => {
-  attachEvents()
-
-  workTransports()
-
-  const userData = personalize()
-  computeCategories(userData)
-  computeCategories(refData)
-  // var res = computeCategories()
-  displayPie(refData, 'ref')
-  displayPie(userData, 'my')
-
-
-  const total = Object.values(myData).reduce((agg, it) => agg + it.total, 0)
-  $('#monTotal').text(total)
-
-  displayTable(userData, refData)
-}
 
 const setTodayValue = (d) => {
     data.transports.today = d / 1000
-
 }
 
 const attachEvents = () => {
@@ -139,5 +120,25 @@ const attachEvents = () => {
   })
 }
 
+
+const main = () => {
+  //attachEvents()
+
+  //workTransports()
+
+  // const userData = personalize()
+  // computeCategories(userData)
+  computeCategories(refData)
+  // var res = computeCategories()
+  displayPie(refData, 'ref')
+  // displayPie(userData, 'my')
+
+
+  var total = Object.values(refData).reduce((agg, it) => agg + it.total, 0)
+  total = Math.round(total / 1000)
+  $('#monTotal').text(total)
+
+  displayTable(refData, refData)
+}
 
 $(document).ready(() => main())
