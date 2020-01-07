@@ -3,7 +3,7 @@
   <head>
      <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <title>Revenus</title>
+     <title>Empreinte CO2</title>
 
     <link rel="stylesheet" href="./styles/vendors/bootstrap.min.css" >
     <script src="./scripts/vendors/jquery-3.4.0.min.js"></script>
@@ -13,20 +13,20 @@
     <script src="./data/mydata.jsonld.js"></script>
   </head>
 <body>
-  <div class="container">
-<H1>Mon empreinte CO2</H1>
+  <div class="container-sm">
+<h4 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Mon empreinte Carbone annuelle <span id="monTotal" style="font-size: 120%;"></span><span style="font-size: 50%;"> kg éqCO2</span></h2>
 
 <!--
   <label for="transportsToday">Mes émissions transports aujourd'hui (g CO2): </label><input type="text" id="transportsToday" placeholder="200"><button type="submit" >Ok</button> -->
 
 
   <!--h2>Mon score CO2 : <span id="monTotal"></span></h2-->
-  <h2>Total <span id="monTotal"></span>TeqCO2. Objectif : 2TeqCO2.</h2>
+  <!-- <h2></h2> -->
     <!-- https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France -->
-  <div id="ref"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <div id="ref" style="width: 330px;height: 330px;margin: auto;" ></div>
   <!-- <div id="my"></div> -->
 
-  <table class="table table-striped">
+  <!-- <table class="table table-striped">
     <thead class="thead-dark">
       <tr>
         <th>Catégorie</th>
@@ -38,10 +38,12 @@
     </thead>
     <tbody>
     </tbody>
-  </table>
+  </table> -->
 
-  <h3>À propos</h3>
-  <p>Données issue du post de blog <a href="http://ravijen.fr/?p=440#rjb14">L’empreinte carbone des français, un sujet tabou ?</a> du blog Ravijen.</p>
+  <h5 style="margin-top: 100px;">Source des données</h5>
+  <ul>
+  <li>Empreinte Carbone par poste de dépense des français reprise du post <a href="http://ravijen.fr/?p=440#rjb14">L’empreinte carbone des français, un sujet tabou ?</a> du blog Ravijen.</li>
+  <li>Objectif 2 tonnes équivalent CO2 : <i>"[La France, avec] sa stratégie nationale bas carbone (SNBC) a un objectif de facteur 4 en 2050, soit une division par 4 des émissions entre 1990 et 2050 pour atteindre des émissions de 140 Mt d'équivalent CO2."</i>. Il s'agit cependant ici du bilan carbone de la France (émissions - captation naturel du territoire, ~7 tonnes équivalent CO2 par habitant) et non de l'empreinte carbone des français (~12 tonnes équivalent CO2). Cet objectif de 140MT et donc 2 Tonnes par habitant reste donc ouvert à débat. <a href="https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France">Wikipedia : Neutralité Carbone</a></li>
   </div>
   <script src="./scripts/main.js"></script>
 </body>

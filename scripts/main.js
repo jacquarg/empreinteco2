@@ -102,11 +102,57 @@ const displayPie = (data, divId) => {
     labels: Object.keys(data).sort(), //res.map(it => it[0]),
     //values: Object.keysres.map(it => it[1]),
     type: "pie",
+    hole: 2000 / computeAnnualTotal(data),
+    textinfo: "label+value",
+    textposition: "inside",
+
   }
   display.values = display.labels.map(it => data[it].total)
-  Plotly.newPlot(divId, [display], { height: 500, width: 500 })
+
+  const layout = {
+    // title: `Mon empreinte Carbone annuelle : ${computeAnnualTotal(data)} kgéqCO2`,
+    showlegend: false,
+    height: 330,
+    width: 330,
+    margin:  {"t": 0, "b": 0, "l": 0, "r": 0},
+    annotations: [{
+      font: {
+        size: 16,
+      },
+      showarrow: false,
+      text: "Obj.<br>2000",
+      x: 0.5,
+      y: 0.505,
+    }],
+  }
+
+  Plotly.newPlot(divId, [display], layout, { responsive: false, displayModeBar: false })
 }
 
+const displayTreeMap = (data, divId) => {
+  const topLevels = Object.keys(data).sort()
+  //const labels = ["Mon empreinte"].concat(topLevels)
+  var display = {
+    type: "treemap",
+    labels: ["Mon empreinte"].concat(topLevels),
+  }
+  display.values = [Object.values(refData).reduce((agg, it) => agg + it.total, 0)].concat(topLevels.map(it => data[it].total))
+  display.parents = [""].concat(display.labels.map(it => "Mon empreinte"))
+
+  Plotly.newPlot(divId, [display], { height: 500, width: 500 })
+//
+//   var data = [{
+//       type: "treemap",
+//       labels: ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+//       parents: ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve" ]
+// }]
+//
+// Plotly.newPlot(divId, data)
+}
+
+const computeAnnualTotal = (data) => {
+  return Object.values(data).reduce((agg, it) => agg + it.total, 0)
+}
 
 const setTodayValue = (d) => {
     data.transports.today = d / 1000
@@ -135,10 +181,10 @@ const main = () => {
 
 
   var total = Object.values(refData).reduce((agg, it) => agg + it.total, 0)
-  total = Math.round(total / 1000)
+  total = Math.round(total)
   $('#monTotal').text(total)
 
-  displayTable(refData, refData)
+  // displayTable(refData, refData)
 }
 
 $(document).ready(() => main())
