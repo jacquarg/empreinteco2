@@ -16,32 +16,7 @@ const workTransports = () => {
   })
 }
 
-const computeCategories = (data) => {
-  Object.values(data).forEach(v => {
-    v.total = computeCategory(v)
-    v.totalDaily = Math.floor(v.total / 365)
-    v.totalMonthly = Math.floor(v.total / 12)
-    v.today = v.totalDaily
-  })
-  // const res = Object.keys(data).map(k => [k, computeCategory(data[k])])
-  // console.log(res)
-  // return res
 
-  // data.forEach =
-}
-
-const computeCategory = (cat) => {
-  if (typeof cat === 'string' || cat instanceof String) {
-   return 0
- } else if (isNaN(cat)) {
-    return Object.values(cat).reduce((agg, value) => {
-        return agg + computeCategory(value)
-
-      }, 0)
-  } else {
-      return cat
-    }
-}
 
 // if (isNaN(value)) {
 //   agg += computeCategory(value)
@@ -168,21 +143,24 @@ const attachEvents = () => {
 
 
 const main = () => {
+  displayObjectivesGraph({
+    objectiv2050: objectiv2050,
+    totalFrenchies: totalFrenchies(refData)
+  })
+
+
   //attachEvents()
 
   //workTransports()
 
   // const userData = personalize()
   // computeCategories(userData)
-  computeCategories(refData)
+  //computeCategories(refData)
   // var res = computeCategories()
   displayPie(refData, 'ref')
   // displayPie(userData, 'my')
 
-
-  var total = Object.values(refData).reduce((agg, it) => agg + it.total, 0)
-  total = Math.round(total)
-  $('#monTotal').text(total)
+  $('#monTotal').text(totalFrenchies(refData))
 
   // displayTable(refData, refData)
 }

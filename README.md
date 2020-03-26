@@ -1,17 +1,13 @@
 # CO2
 
 # TODO
-
-[v] Camembert conso moyenne des français par "poste"
+* Graphe Objectif 2050, La conso des français
+* Détails par postes
+* Détails par sous-postes.
 * Objectif CO2 par individu
-[v] Ramené par an, mois, jour, ...
-[v] Style Bootstrap latest
-[v] Page : "source des données, méthode de calculs, ..."
-* Treemap chart.
-* Disposition mobile : 2T en carré, sans marges, la conso restante à droite.
 * Page à propos / dispositions légales
 * Solution tracking visites.
-* Mise en ligne Alpha
+[v] Mise en ligne Alpha
 * maquette design :
   [v] visualiser objectif général
   * couleur / types
