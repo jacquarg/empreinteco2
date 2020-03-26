@@ -174,16 +174,24 @@ const main = () => {
 
   // const userData = personalize()
   // computeCategories(userData)
-  computeCategories(refData)
+  //computeCategories(refData)
+
   // var res = computeCategories()
-  displayPie(refData, 'ref')
+  //displayPie(refData, 'ref')
   // displayPie(userData, 'my')
 
+  upgradeItem(refData)
 
-  var total = Object.values(refData).reduce((agg, it) => agg + it.total, 0)
-  total = Math.round(total)
-  $('#monTotal').text(total)
 
+
+  // var total = Object.values(refData).reduce((agg, it) => agg + it.total, 0)
+  // total = Math.round(total)
+  console.log(refData)
+  var data = { objectif: {total: 2000}, standard: refData }
+  console.log(data)
+
+  $('#monTotal').text(refData.total)
+  displayChart(data, "diagram", 330)
   // displayTable(refData, refData)
 }
 

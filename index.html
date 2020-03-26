@@ -11,6 +11,22 @@
     <script src="./scripts/vendors/plotly-latest.min.js"></script>
     <script src="./data/ravijen_2017.jsonld.js"></script>
     <script src="./data/mydata.jsonld.js"></script>
+    <script src="./scripts/treechart.js"></script>
+    <style >
+      .treegraph {
+        position: relative;
+      }
+      .tgrow {
+        display: block;
+        position: relative;
+      }
+
+      .tgcase {
+        position: absolute;
+        display: inline-block;
+        border: 1px solid red;
+      }
+    </style>
   </head>
 <body>
   <div class="container-sm">
@@ -23,7 +39,7 @@
   <!--h2>Mon score CO2 : <span id="monTotal"></span></h2-->
   <!-- <h2></h2> -->
     <!-- https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France -->
-  <div id="ref" style="width: 330px;height: 330px;margin: auto;" ></div>
+  <div id="diagram" class="treegraph" style="width: 330px;height: 330px;margin: auto;" ></div>
   <!-- <div id="my"></div> -->
 
   <!-- <table class="table table-striped">

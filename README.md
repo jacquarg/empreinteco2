@@ -2,16 +2,9 @@
 
 # TODO
 
-[v] Camembert conso moyenne des français par "poste"
+* Custom chart.
 * Objectif CO2 par individu
-[v] Ramené par an, mois, jour, ...
-[v] Style Bootstrap latest
-[v] Page : "source des données, méthode de calculs, ..."
-* Treemap chart.
-* Disposition mobile : 2T en carré, sans marges, la conso restante à droite.
-* Page à propos / dispositions légales
 * Solution tracking visites.
-* Mise en ligne Alpha
 * maquette design :
   [v] visualiser objectif général
   * couleur / types
@@ -19,7 +12,7 @@
 * Base de données "leviers" (chauffage, 10km voiture, ...)
 
 
-* équivalence objectif, par catégories.
+* équivalence objectif, par -catégories.
 * Personnalisation résultat transport
 * Personnalisation résultat électricité / chauffage
 * Personnalisation résultat alimentation ... ?
@@ -49,3 +42,19 @@
 * présenter son empreinte CO2 individuelle, estimé à partir de la moyenne nationale, personnalisée via questionnaire // collecte de données
 * présenter les leviers de réduction
 * tracer la progression.
+* rubriques :  
+  * geste quotidiens (<-- graphique / par jour // suggestions ...)
+  * geste mensuels (<-- graphique / par mensuels // suggestions ...)
+  * hebdomadaires
+  * trimestriels ? / saisonniers ?
+* date des objectifs sur les totaux CO2 à atteindre.
+
+
+# Done
+
+* 2020-01-07 Mise en ligne Alpha
+* Page à propos / dispositions légales
+* Page : "source des données, méthode de calculs, ..."
+* Style Bootstrap latest
+* Ramené par an, mois, jour, ...
+* Camembert conso moyenne des français par "poste"
