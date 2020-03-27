@@ -148,6 +148,24 @@ const main = () => {
     totalFrenchies: totalFrenchies(refData)
   })
 
+  displayDistributionGraph(refData)
+
+
+  const transports = refData.transports
+  computeCategories(transports)
+  displayItemSubGraph('transports', transports)
+
+  const logement = refData.logement
+  computeCategories(logement)
+  displayItemSubGraph('logement', logement)
+
+  const biens = refData.biens
+  computeCategories(biens)
+  displayItemSubGraph('biens', biens)
+
+  const alimentation = refData.alimentation
+  computeCategories(alimentation)
+  displayItemSubGraph('alimentation', alimentation)
 
   //attachEvents()
 
@@ -157,10 +175,10 @@ const main = () => {
   // computeCategories(userData)
   //computeCategories(refData)
   // var res = computeCategories()
-  displayPie(refData, 'ref')
+  // displayPie(refData, 'ref')
   // displayPie(userData, 'my')
 
-  $('#monTotal').text(totalFrenchies(refData))
+  // $('#monTotal').text(totalFrenchies(refData))
 
   // displayTable(refData, refData)
 }

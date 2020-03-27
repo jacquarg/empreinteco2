@@ -1,7 +1,7 @@
 # CO2
 
 # TODO
-* Graphe Objectif 2050, La conso des français
+[v] Graphe Objectif 2050, La conso des français
 * Détails par postes
 * Détails par sous-postes.
 * Objectif CO2 par individu

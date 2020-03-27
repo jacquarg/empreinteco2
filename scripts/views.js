@@ -23,7 +23,60 @@ const displayObjectivesGraph = (data) => {
       height: 330,
       width: 330,
       margin:  {"t": 0, "b": 0, "l": 0, "r": 0},
-    })
+    },
+   {
+     responsive: false,
+     displayModeBar: false
+   })
+}
+
+const displayDistributionGraph = (data) => {
+  var display = {
+    labels: Object.keys(data).sort(), //res.map(it => it[0]),
+    //values: Object.keysres.map(it => it[1]),
+    type: "pie",
+    textinfo: "label+value",
+    textposition: "inside",
+  }
+  display.values = display.labels.map(it => data[it].total)
+
+  const layout = {
+    // title: `Mon empreinte Carbone annuelle : ${computeAnnualTotal(data)} kgéqCO2`,
+    showlegend: false,
+    height: 330,
+    width: 330,
+    margin:  {"t": 0, "b": 0, "l": 0, "r": 0},
+  }
+
+  Plotly.newPlot('distributionGraph', [display], layout, { responsive: false, displayModeBar: false })
+}
+
+const displayItemSubGraph = (tag, data) => {
+  var display = {
+    labels: Object.keys(data).sort().filter(it => !it.startsWith('total')), //res.map(it => it[0]),
+    //values: Object.keysres.map(it => it[1]),
+    type: "pie",
+    textinfo: "label+value",
+    textposition: "inside",
+  }
+  display.values = display.labels.map((it) => {
+    const item = data[it]
+    if (isNaN(item)) {
+      return item.total
+    } else {
+      return item
+    }
+  })
+
+  const layout = {
+    // title: `Mon empreinte Carbone annuelle : ${computeAnnualTotal(data)} kgéqCO2`,
+    showlegend: false,
+    height: 330,
+    width: 330,
+    margin:  {"t": 0, "b": 0, "l": 0, "r": 0},
+  }
+
+  Plotly.newPlot(`${tag}Graph`, [display], layout, { responsive: false, displayModeBar: false })
 }
 
 // const displayPie = (data, divId) => {
