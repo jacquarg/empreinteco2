@@ -2,16 +2,13 @@
 
 # TODO
 [v] Graphe Objectif 2050, La conso des français
-* Détails par postes
-* Détails par sous-postes.
-* Objectif CO2 par individu
-* Page à propos / dispositions légales
+[v] Détails par postes
+[v] Détails par sous-postes.
+[v] Page à propos / dispositions légales
 * Solution tracking visites.
-[v] Mise en ligne Alpha
-* maquette design :
-  [v] visualiser objectif général
-  * couleur / types
-  * 2e niveau de légende
+* Mise en ligne Alpha 2
+* Empreinte domicile travail : à partir données 39% trajets voiture sont domicile travail cf (https://hal.archives-ouvertes.fr/hal-00546282/document) <-- personnalisation !
+
 * Base de données "leviers" (chauffage, 10km voiture, ...)
 
 

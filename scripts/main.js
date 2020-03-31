@@ -150,7 +150,6 @@ const main = () => {
 
   displayDistributionGraph(refData)
 
-
   const transports = refData.transports
   computeCategories(transports)
   displayItemSubGraph('transports', transports)
