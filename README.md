@@ -6,7 +6,7 @@
 [v] Détails par sous-postes.
 [v] Page à propos / dispositions légales
 * Solution tracking visites.
-* Mise en ligne Alpha 2
+[v] Mise en ligne Alpha 2
 * Empreinte domicile travail : à partir données 39% trajets voiture sont domicile travail cf (https://hal.archives-ouvertes.fr/hal-00546282/document) <-- personnalisation !
 
 * Base de données "leviers" (chauffage, 10km voiture, ...)

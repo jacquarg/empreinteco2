@@ -166,6 +166,7 @@ const main = () => {
   computeCategories(alimentation)
   displayItemSubGraph('alimentation', alimentation)
 
+  displayWorkHomeCar(workHomeCarFrenchies(refData), workHomeByMorningDistance)
   //attachEvents()
 
   //workTransports()

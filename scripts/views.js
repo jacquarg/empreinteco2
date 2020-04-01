@@ -79,6 +79,22 @@ const displayItemSubGraph = (tag, data) => {
   Plotly.newPlot(`${tag}Graph`, [display], layout, { responsive: false, displayModeBar: false })
 }
 
+
+const displayWorkHomeCar = (moy, computer) => {
+  $('#domicileTravailRef').text(moy)
+
+  $('#domicileTravailDistance').change((ev) => {
+    const distance = Number(ev.target.value)
+
+    $('#domicileTravailUsr').text(computer(distance))
+
+    // TODO
+    console.log(`Mon Empreinte: ${totalFrenchies(refData) - moy + computer(distance)}`)
+    console.log(`Ratio: ${Math.round(100 * moy / totalFrenchies(refData))}`)
+  })
+
+}
+
 // const displayPie = (data, divId) => {
 //   var display = {
 //     labels: Object.keys(data).sort(), //res.map(it => it[0]),

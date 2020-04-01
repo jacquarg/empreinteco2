@@ -37,6 +37,35 @@ const totalFrenchies = (refData) => {
   return total
 }
 
+const workHomeCarFrenchies = (refData) => {
+  // TODO: add this const to a data object.
+  const workHomePart = 0.39
+  return Math.round(refData.transports.voiture.voitureUsage * workHomePart)
+}
+
+const workHomeByMorningDistance = (morningDistance) => {
+  // TODO: add this const to a data object, with  source
+  const workingDays = 215
+  const cooByKilometers = 0.14
+  const totalDistance = 215 * morningDistance * 2
+  return Math.round(totalDistance * cooByKilometers)
+}
+
+var cooRefToIgnore = 0
+var cooPersonalized = 0
+const updatePersonalizationCoo = (refToIgnore, personalized) => {
+  cooRefToIgnore += refToIgnore
+  cooPersonalized += personalized
+}
+
+const getPersonalizationRatio = () => {
+  return cooRefToIgnore / totalFrenchies(refData)
+}
+
+const monEmpreinteCarbone = (ref, personalizationRatio, personalized) => {
+  return Math.round(ref * personalizationRatio + personalized)
+}
+
 
 // Initialization //////////////////////////////////////////////////////////////
 prepareData(refData)
