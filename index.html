@@ -9,48 +9,66 @@
     <script src="./scripts/vendors/jquery-3.4.0.min.js"></script>
     <script src="./scripts/vendors/bootstrap.bundle.min.js"></script>
     <script src="./scripts/vendors/plotly-latest.min.js"></script>
+
     <script src="./data/ravijen_2017.jsonld.js"></script>
     <script src="./data/mydata.jsonld.js"></script>
     <script src="./scripts/usecases.js"></script>
-    <script src="./scripts/views.js"></script>
+
+    <script src="./scripts/vendors/vue.js"></script>
+    <script src="./scripts/views/plotly_graph.js"></script>
+    <script src="./scripts/views/main_categories_graph.js"></script>
+    <script src="./scripts/views/categories_graph.js"></script>
+    <script src="./scripts/views/objectives_graph.js"></script>
+    <script src="./scripts/views/customize_work_home.js"></script>
   </head>
 <body>
 
-  <div class="container-sm">
-      <h4 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Mon empreinte Carbone annuelle <span style="font-size: 50%;">(kg éqCO2)</span></h4>
-      <div id="objectivesGraph" style="width: 330px;height: 330px;margin: auto;" ></div>
+  <div class="container-sm" id="app">
 
-      <h4 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Répartition par postes <span style="font-size: 50%;">(kg éqCO2)</span></h4>
-      <div id="distributionGraph" style="width: 330px;height: 330px;margin: auto;" ></div>
+      <graph-objectives></graph-objectives>
+      <graph-main-categories></graph-main-categories>
 
-      <h5 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Transports répartition fine <span style="font-size: 50%;">(kg éqCO2)</span></h5>
-      <div id="transportsGraph" style="width: 330px;height: 330px;margin: auto;" ></div>
-      <div>
-        <p>En moyenne, les trajets domicile-travail représentent 39% (1) des déplacements en voiture des français. Soit <span id="domicileTravailRef"></span><span style="font-size: 50%;">(kg éqCO2)</span>.
-        </p>
-        <p>Et vous ? Quelle distance (km) parcourez-vous en voiture pour vous rendre à votre travail ?
-        </p>
-        <input class="form-control" type="number" placeholder="2.3" id="domicileTravailDistance">
-        <p>
-          Sur un an, cela représente : <span id="domicileTravailUsr"></span><span style="font-size: 50%;">(kg éqCO2)</span>.
-        </p>
+      <customize-work-home></customize-work-home>
 
-      </div>
-
-      <h5 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Logement répartition fine <span style="font-size: 50%;">(kg éqCO2)</span></h5>
-      <div id="logementGraph" style="width: 330px;height: 330px;margin: auto;" ></div>
-
-      <h5 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Biens répartition fine <span style="font-size: 50%;">(kg éqCO2)</span></h5>
-      <div id="biensGraph" style="width: 330px;height: 330px;margin: auto;" ></div>
-
-      <h5 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Alimentation répartition fine <span style="font-size: 50%;">(kg éqCO2)</span></h5>
-      <div id="alimentationGraph" style="width: 330px;height: 330px;margin: auto;" ></div>
-
+      <graph-categories v-for="it in subItems" v-bind:item="it" v-bind:key="it.tag"></graph-categories>
   <h5 style="margin-top: 100px;">Source des données</h5>
   <ul>
   <li>Empreinte Carbone par poste de dépense des français reprise du post <a href="http://ravijen.fr/?p=440#rjb14">L’empreinte carbone des français, un sujet tabou ?</a> du blog Ravijen.</li>
   <li>Objectif 2 tonnes équivalent CO2 : <i>"[La France, avec] sa stratégie nationale bas carbone (SNBC) a un objectif de facteur 4 en 2050, soit une division par 4 des émissions entre 1990 et 2050 pour atteindre des émissions de 140 Mt d'équivalent CO2."</i>. Il s'agit cependant ici du bilan carbone de la France (émissions - captation naturel du territoire, ~7 tonnes équivalent CO2 par habitant) et non de l'empreinte carbone des français (~12 tonnes équivalent CO2). Cet objectif de 140MT et donc 2 Tonnes par habitant reste donc ouvert à débat. <a href="https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France">Wikipedia : Neutralité Carbone</a></li>
   </div>
-  <script src="./scripts/main.js"></script>
+
+  <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          subItems: [
+            {
+              title: "Transports",
+              tag: 'transportGraph',
+              refCategory: refData.transports,
+              userCategory: usrData.transports,
+            },
+            {
+              title: "Logement",
+              tag: 'logementGraph',
+              refCategory: refData.logement,
+              userCategory: usrData.logement,
+            },
+            {
+              title: "Biens",
+              tag: 'bienGraph',
+              refCategory: refData.biens,
+              userCategory: usrData.biens,
+            },
+            {
+              title: "Alimentation",
+              tag: 'alimentationGraph',
+              refCategory: refData.alimentation,
+              userCategory: usrData.alimentation,
+            },
+          ]
+        }
+    })
+    </script>
 </body>
 </html>

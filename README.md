@@ -7,7 +7,12 @@
 [v] Page à propos / dispositions légales
 * Solution tracking visites.
 [v] Mise en ligne Alpha 2
-* Empreinte domicile travail : à partir données 39% trajets voiture sont domicile travail cf (https://hal.archives-ouvertes.fr/hal-00546282/document) <-- personnalisation !
+[v] Passer à vue.js pour la vue.
+* couleurs par catégories
+* texte introductifs, "c'est quoi l'empreinte carbone"
+* "de l'individu, vers le global"
+[v] Empreinte domicile travail : à partir données 39% trajets voiture sont domicile travail cf (https://hal.archives-ouvertes.fr/hal-00546282/document) <-- personnalisation !
+* barre vous (à la place de "un français")// % personnalisation <=> kgCO2 ref "ignorés"
 
 * Base de données "leviers" (chauffage, 10km voiture, ...)
 
