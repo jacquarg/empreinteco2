@@ -19,7 +19,6 @@ const computeItem = (cat, usrCat) => {
   } else {
     const usrValue = (usrCat && usrCat.usr) ? usrCat.usr : 0
     const refValue = (usrCat && usrCat.ref) ? usrCat.ref : 0
-    console.log(`${cat} ${usrValue} ${refValue}`)
     return cat - refValue + usrValue
   }
 }
@@ -37,7 +36,6 @@ const computeEachCategories = (root, usrData) => {
     .forEach(([k, v]) => {
       const usrCat = usrData ? usrData[k]: null
 
-      console.log(`${k} ${v} ${usrCat}`)
       res[k] = computeItem(v, usrCat)
     })
   return res
@@ -83,6 +81,27 @@ const workHomeByMorningDistance = (morningDistance) => {
   const totalDistance = 215 * morningDistance * 2
   return Math.round(totalDistance * cooByKilometers)
 }
+
+// https://bilan-electrique-2018.rte-france.com/emissions-de-co2/# ~> 37gCO2/kWh
+const elecToCO2 = (eleckWh) => {
+  return Math.round(eleckWh * 0.037)
+}
+
+// http://www.energies-avenir.fr/page/emissions-de-co-small-2-small-16
+// TODO: 230g/kWh
+const gazToCO2 = (gazkWh) => {
+  return Math.round(gazkWh * 0.230)
+}
+
+const electricityFootPrint = (elecEnergy, homeCount) => {
+  return elecToCO2(elecEnergy / homeCount)
+}
+
+const gazFootPrint = (gazEnergy, homeCount) => {
+  return gazToCO2(gazEnergy / homeCount)
+}
+
+
 // Public API /////////////////////////////////////////////////////////////////
 const  objectiv2050 = 2000
 
@@ -101,6 +120,31 @@ const setWorkHomeByMorningDistance = (morningDistance, usrData) => {
   const ref = workHomeCarFrenchies()
   usrData.transports.voiture.voitureUsage.usr = usr
   usrData.transports.voiture.voitureUsage.ref = ref
+}
+
+const setHomeEnergy = (homeCount, elecEnergy, gazEnergy, individualHeat, individualHotWatter, usrData) => {
+  //https://travaux.edf.fr/electricite/raccordement/repartition-de-la-consommation-d-electricite-au-sein-d-un-foyer-francais
+
+  var personalizedPart = 0.07 + 0.17
+
+  if (individualHeat) {
+    personalizedPart += 0.62
+  }
+  if (individualHotWatter) {
+    personalizedPart += 0.14
+  }
+  const usrFluides = usrData.logement.fluides
+  const refFluides = refData.logement.fluides
+
+  usrFluides.electricite.usr = electricityFootPrint(elecEnergy, homeCount)
+  usrFluides.electricite.ref = Math.round(refFluides.electricite * personalizedPart)
+
+  usrFluides.gaz.usr = gazFootPrint(gazEnergy, homeCount)
+  usrFluides.gaz.ref = Math.round(refFluides.gaz * personalizedPart)
+
+  usrFluides.pp.ref = Math.round(refFluides.pp * personalizedPart)
+  usrFluides.specifique.ref = Math.round(refFluides.specifique * personalizedPart)
+  usrFluides.reseauChaleur.ref = Math.round(refFluides.reseauChaleur * personalizedPart)
 }
 
 const monEmpreinteCarbone = (refData, usrData) => {
@@ -131,6 +175,34 @@ const monEmpreinteCarbone = (refData, usrData) => {
 // computeCategories(refData.alimentation)
 
 const usrData = {
+  logement: {
+    fluides: {
+      gaz: {
+        usr: 0,
+        ref: 0
+      },
+      pp: {
+        usr: 0,
+        ref: 0
+      },
+      specifique: {
+        usr: 0,
+        ref: 0
+      },
+      electricite: {
+        usr: 40,
+        ref: 0
+      },
+      reseauChaleur: {
+        usr: 0,
+        ref: 0
+      },
+      eauDechets: {
+        usr: 0,
+        ref: 0
+      },
+    },
+  },
   transports: {
      voiture: {
        voitureUsage: {
@@ -138,5 +210,5 @@ const usrData = {
          ref: 0
        }
      }
-   }
+   },
 }

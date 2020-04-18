@@ -20,6 +20,7 @@
     <script src="./scripts/views/categories_graph.js"></script>
     <script src="./scripts/views/objectives_graph.js"></script>
     <script src="./scripts/views/customize_work_home.js"></script>
+    <script src="./scripts/views/customize_energy_annual.js"></script>
   </head>
 <body>
 
@@ -29,7 +30,7 @@
       <graph-main-categories></graph-main-categories>
 
       <customize-work-home></customize-work-home>
-
+      <customize-energy-annual></customize-energy-annual>
       <graph-categories v-for="it in subItems" v-bind:item="it" v-bind:key="it.tag"></graph-categories>
   <h5 style="margin-top: 100px;">Source des données</h5>
   <ul>

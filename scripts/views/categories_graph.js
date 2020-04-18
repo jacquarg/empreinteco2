@@ -4,8 +4,6 @@ Vue.component('graph-categories', {
   computed: {
     plotData: function() {
       const categories = computeEachCategories(this.item.refCategory, this.item.userCategory)
-      console.log(this.item.refCategory)
-      console.log(categories)
       var display = {
         labels: Object.keys(categories).sort(), //res.map(it => it[0]),
         //values: Object.keysres.map(it => it[1]),

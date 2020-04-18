@@ -13,7 +13,9 @@
 * "de l'individu, vers le global"
 [v] Empreinte domicile travail : à partir données 39% trajets voiture sont domicile travail cf (https://hal.archives-ouvertes.fr/hal-00546282/document) <-- personnalisation !
 * barre vous (à la place de "un français")// % personnalisation <=> kgCO2 ref "ignorés"
-
+* Fluides : chauffage + eau chaude individuelle --> cf kWh facture elec / gaz.
+  sinon, elec + gaz : + valeur moyenne pour la quote part chauffage + eau chaude.
+* Centraliser données de "calcul" (elect to CO2, gaz To CO2, ...), avec label, reference, ...
 * Base de données "leviers" (chauffage, 10km voiture, ...)
 
 
