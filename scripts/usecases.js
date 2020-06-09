@@ -103,7 +103,12 @@ const gazFootPrint = (gazEnergy, homeCount) => {
 
 
 // Public API /////////////////////////////////////////////////////////////////
-const  objectiv2050 = 2000
+const objectiv2050 = 2000
+
+// Obj = -5/16 * (year - 2018) + 12
+// baisse de 300kg par an.
+const objectiv2025 = 9813
+const objectiv2020 = 11400
 
 const prepareData = computeCategories
 
@@ -147,24 +152,75 @@ const setHomeEnergy = (homeCount, elecEnergy, gazEnergy, individualHeat, individ
   usrFluides.reseauChaleur.ref = Math.round(refFluides.reseauChaleur * personalizedPart)
 }
 
-const monEmpreinteCarbone = (refData, usrData) => {
-  return totalFrenchies(refData) - usrData.workHomeCar.ref + usrData.workHomeCar.usr
+const setFoodWeekly = (homeCount,
+  feculents,
+  fruits,
+  prepares,
+  biscuits,
+  lait,
+  viande,
+  usrData) => {
+    const setCustomized = (getter) => {
+      getter(usrData).ref = getter(refData)
+    }
+
+    const computeYear = (week, coef) => {
+      return Math.round(week * coef * 52)
+    }
+
+    const coef = {
+      feculents : 0.850,
+      fruits : 1.21,
+      prepares : 2.02,
+      biscuits: 2.18,
+      lait: 4.36,
+      //* Graisse : 8.59
+      viande: 9.34,
+    }
+
+    var other = computeYear(feculents, coef.feculents)
+    other += computeYear(fruits, coef.fruits)
+    other += computeYear(prepares, coef.prepares)
+    other += computeYear(biscuits, coef.biscuits)
+    usrData.alimentation.autresAliments.usr = other
+    setCustomized(((d) => d.alimentation.autresAliments))
+
+    usrData.alimentation.cremerie.lait.usr = computeYear(lait, coef.lait)
+    setCustomized(((d) => d.alimentation.cremerie.lait))
+    setCustomized(((d) => d.alimentation.cremerie.yaourt))
+    setCustomized(((d) => d.alimentation.cremerie.fromage))
+    setCustomized(((d) => d.alimentation.cremerie.beurre))
+    setCustomized(((d) => d.alimentation.cremerie.oeuf))
+
+    usrData.alimentation.viandes.autresViandes.usr =
+    computeYear(viande, coef.viande)
+    setCustomized(((d) => d.alimentation.viandes.autresViandes))
+    setCustomized(((d) => d.alimentation.viandes.poissons))
+    setCustomized(((d) => d.alimentation.viandes.ruminants))
+    setCustomized(((d) => d.alimentation.viandes.porc))
+    setCustomized(((d) => d.alimentation.viandes.volailles))
 }
 
-// var cooRefToIgnore = 0
-// var cooPersonalized = 0
-// const updatePersonalizationCoo = (refToIgnore, personalized) => {
-//   cooRefToIgnore += refToIgnore
-//   cooPersonalized += personalized
-// }
-//
-// const getPersonalizationRatio = () => {
-//   return cooRefToIgnore / totalFrenchies(refData)
-// }
-//
-// const monEmpreinteCarbone = (ref, personalizationRatio, personalized) => {
-//   return Math.round(ref * personalizationRatio + personalized)
-// }
+const personalizationRate = (usrData) => {
+  // total "ref"
+  const totalizeRef = (root) => {
+    return Object.entries(root).reduce((agg, [k, v]) => {
+      if (k == "ref") {
+        agg += v
+      } else if (typeof v == 'object') {
+        agg += totalizeRef(v)
+      }
+      return agg
+    }, 0)
+  }
+
+  const ref = totalizeRef(usrData)
+  const total = computeTotal(refData, {})
+
+  return Math.round(100 * ref / total)
+}
+
+
 
 
 // Initialization //////////////////////////////////////////////////////////////
@@ -175,6 +231,31 @@ const monEmpreinteCarbone = (refData, usrData) => {
 // computeCategories(refData.alimentation)
 
 const usrData = {
+  alimentation: {
+    // boissons: {
+    //   boissonsAlcoolisees: 145,
+    //   boissonsSansAlcool: 118,
+    // },
+    autresAliments: { usr: 0, ref: 0 },
+    // (Fruits et légumes, féculents plats élaborés,  condiments, etc )
+
+  // Produits laitiers et œufs			408 kg
+    cremerie: {
+      lait:  { usr: 0, ref: 0 },
+      yaourt: { usr: 0, ref: 0 },
+      fromage:  { usr: 0, ref: 0 },
+      beurre:  { usr: 0, ref: 0 },
+      oeuf:  { usr: 0, ref: 0 },
+    },
+    viandes: {
+      poissons:  { usr: 0, ref: 0 },
+      ruminants:  { usr: 0, ref: 0 },
+      porc:  { usr: 0, ref: 0 },
+      volailles:  { usr: 0, ref: 0 },
+      autresViandes:  { usr: 0, ref: 0 },
+    },
+  },
+
   logement: {
     fluides: {
       gaz: {

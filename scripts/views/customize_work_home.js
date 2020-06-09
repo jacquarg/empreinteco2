@@ -14,13 +14,15 @@ Vue.component('customize-work-home', {
     return {
       usrData,
       ref: workHomeCarFrenchies(),
-      usrDistance: 10.04,
+      usrDistance: undefined,
     }
   },
   computed: {
     usr: function() {
-      setWorkHomeByMorningDistance(this.usrDistance, this.usrData)
-      return this.usrData.transports.voiture.voitureUsage.usr
+      if (this.usrDistance) {
+        setWorkHomeByMorningDistance(this.usrDistance, this.usrData)
+        return this.usrData.transports.voiture.voitureUsage.usr
+      }
     }
   }
 })

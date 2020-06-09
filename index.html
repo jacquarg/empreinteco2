@@ -21,21 +21,110 @@
     <script src="./scripts/views/objectives_graph.js"></script>
     <script src="./scripts/views/customize_work_home.js"></script>
     <script src="./scripts/views/customize_energy_annual.js"></script>
+    <script src="./scripts/views/customize_food_weekly.js"></script>
+    <script src="./scripts/views/my_carbon_footprint.js"></script>
   </head>
 <body>
 
   <div class="container-sm" id="app">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Mon empreinte carbone, quezako</h2>
+        <p>Mon empreinte carbone annuelle, c'est la quantité de gaz à effet de serre que j'ai émise au cours d'une année.
+        Il y a certe le CO2 qu'on émet directement en expirant (~300 kgéqCO2 par an), mais c'est notre mode de vie qui est responsable des quantités les plus importants (cf graph à côté)</p>
+      </div>
+      <div class="col-md-6">
+        <graph-main-categories></graph-main-categories>
+      </div>
+      <div class="col-md-6">
+        <p>Ces valeurs d'émissions annuelles de kg d'équivalent CO2 sont la moyenne par français.
+          Se déplacer émet plus de carbone que se nourrir. Chacune des catégories est détaillée ci-dessous.
+          Commencer à les personnaliser avec quelques questions, et ainsi découvrir si vous êtes plus ou moins émetteur que la moyenne !
+        </p>
+      </div>
+    </div>
 
-      <graph-objectives></graph-objectives>
-      <graph-main-categories></graph-main-categories>
+    <div class="row">
+      <div class="col-md-6">
+        <my-carbon-footprint></my-carbon-footprint>
+      </div>
 
-      <customize-work-home></customize-work-home>
-      <customize-energy-annual></customize-energy-annual>
-      <graph-categories v-for="it in subItems" v-bind:item="it" v-bind:key="it.tag"></graph-categories>
-  <h5 style="margin-top: 100px;">Source des données</h5>
-  <ul>
-  <li>Empreinte Carbone par poste de dépense des français reprise du post <a href="http://ravijen.fr/?p=440#rjb14">L’empreinte carbone des français, un sujet tabou ?</a> du blog Ravijen.</li>
-  <li>Objectif 2 tonnes équivalent CO2 : <i>"[La France, avec] sa stratégie nationale bas carbone (SNBC) a un objectif de facteur 4 en 2050, soit une division par 4 des émissions entre 1990 et 2050 pour atteindre des émissions de 140 Mt d'équivalent CO2."</i>. Il s'agit cependant ici du bilan carbone de la France (émissions - captation naturel du territoire, ~7 tonnes équivalent CO2 par habitant) et non de l'empreinte carbone des français (~12 tonnes équivalent CO2). Cet objectif de 140MT et donc 2 Tonnes par habitant reste donc ouvert à débat. <a href="https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France">Wikipedia : Neutralité Carbone</a></li>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <graph-categories v-bind:item="subItems[0]"></graph-categories>
+      </div>
+      <div class="col-md-6">
+        <p>En moyenne, la voiture est le plus gros contributeur. Sur ce total de près de 2000 kgéqCO2, environ 400kg sont dûs à l'achat (c'est à dire la construction de la voiture) et 600kgéqCO2 aux trajets domicile travail.
+          L'avion est nettement second car beaucoup moins prisé des français. Les autres transports (transports en commun (métro, train de banlieu, ..), TGV, bateau, ...) compte pour moins de 5% de ce total.</p>
+        <customize-work-home></customize-work-home>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <graph-categories v-bind:item="subItems[1]"></graph-categories>
+      </div>
+      <div class="col-md-6">
+        <p>Au logement, c'est la consommation directe d'énergie qui est la plus émettrice de gaz à effet de serre. En France, le chauffage c'est plus de la moitié (60%) des l'énergie consommée au foyer.</p>
+        <p>
+          Du fait du nucléair et des énergies renouvelable, l'électricité émet seulement 37géqCO2/kWh contre 230 pour le gaz (qui ne comporte aujourd'hui que 5% de biogaz, quasiment neutre en émissions de carbone).
+        </p>
+        <customize-energy-annual></customize-energy-annual>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <graph-categories v-bind:item="subItems[2]"></graph-categories>
+      </div>
+      <div class="col-md-6">
+        <p>L'achat de nouveau bien compte pour plus du cinquième de nos émissions de gaz à effet de serre. TV, ordinateurs, smartphones, ... devenu des consommables ont un énorme impact. Ils représentent autant d'émissions de carbone que le chauffage au logement !
+        L'habillement, par son volume est aussi un très gros contributeur.</p>
+        <p>Les usages numériques, souvent pointé du doigt restent faible : moins de 1% des émissions annuelles. Cependant, c'est beaucoup plus que les émissions de transports en commun !</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <graph-categories v-bind:item="subItems[3]"></graph-categories>
+      </div>
+      <div class="col-md-6">
+        <p>Réduire l'empreinte carbone de son alimentation, ça veut dire s'arrêter de manger ? Pas forcément. Les types d'aliments on des impacts très différents. Sans surprise, la viandes et toutes les resources que cela implique pour nourrir et faire grandir des animaux compte pour près de la moitié des émissions. </p>
+        <p>Les produits laitiers sont aussi de gros émetteurs, en raison du fort pouvoir d'effete de serre du méthane (émis par les prout de vache) et la chaîne logistique réfrigérée qu'implique le lait frais.</p>
+        <p>Un végan divisera rapidement son empreinte carbone, mais attention, un budha-bowl avocat, quinoa, graine de chia à fait un quart de tour de planète en avion !
+        <!-- <customize-food-weekly></customize-food-weekly> -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Réduire mon empreinte carbone, pourquoi ?</h2>
+        <p>Depuis près de 40 ans, des scientifiques alertent sur un réchaffement global sur terre, causé par l'augementation des gaz à effet de serre dans l'atmosphère. Ceci finit par amener la comunauté international à se fixer des objectif de diminution des émissions de gaz à effet de serre.</p>
+        <p>En France, la Stratégie Nationale Bas-Carbone (SNBC) fixe l'objectif de la neutralité carbone en 2050, qui se traduit par 2TCO2e d'émission par individu en 2050. C'est 6 fois moins qu'en 2018 ! Pour avancer vers cet objectif, il faut émettre moins de 11400kgCO2e en 2020. Où en êtes-vous ?</p>
+      </div>
+      <div class="col-md-6">
+        <graph-objectives></graph-objectives>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <h5 style="margin-top: 100px;">Source des données</h5>
+
+        <!-- TODO FAQ :
+        * empreinte carbone VS bilan carbone.
+        * kgEqCO2, méthane, ...
+        * http://www.carbone4.com/wp-content/uploads/2019/06/Publication-Carbone-4-Faire-sa-part-pouvoir-responsabilite-climat.pdf
+      -->
+        <ul>
+          <li>Empreinte Carbone par poste de dépense des français reprise du post <a href="http://ravijen.fr/?p=440#rjb14">L’empreinte carbone des français, un sujet tabou ?</a> du blog Ravijen.</li>
+          <li>Objectif 2 tonnes équivalent CO2 : <i>"[La France, avec] sa stratégie nationale bas carbone (SNBC) a un objectif de facteur 4 en 2050, soit une division par 4 des émissions entre 1990 et 2050 pour atteindre des émissions de 140 Mt d'équivalent CO2."</i>. Il s'agit cependant ici du bilan carbone de la France (émissions - captation naturel du territoire, ~7 tonnes équivalent CO2 par habitant) et non de l'empreinte carbone des français (~12 tonnes équivalent CO2). Cet objectif de 140MT et donc 2 Tonnes par habitant reste donc ouvert à débat. <a href="https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France">Wikipedia : Neutralité Carbone</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
   </div>
 
   <script>

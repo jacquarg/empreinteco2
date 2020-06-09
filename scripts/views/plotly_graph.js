@@ -9,10 +9,13 @@ Vue.component('plotly-graph', {
   watch: {
     plotData: {
       immediate: true,
-      handler: function(plotData) {
+      handler: function(d) {
         const id = this.randomId
+        if (!Array.isArray(d)) {
+          d = [d]
+        }
         this.$nextTick(function() {
-          Plotly.newPlot(id, [plotData],
+          Plotly.newPlot(id, d,
             {
               showlegend: false,
               height: 330,

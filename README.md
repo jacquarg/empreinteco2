@@ -1,28 +1,18 @@
 # CO2
 
 # TODO
-[v] Graphe Objectif 2050, La conso des français
-[v] Détails par postes
-[v] Détails par sous-postes.
-[v] Page à propos / dispositions légales
+* Page à propos / dispositions légales (update)
 * Solution tracking visites.
-[v] Mise en ligne Alpha 2
-[v] Passer à vue.js pour la vue.
 * couleurs par catégories
-* texte introductifs, "c'est quoi l'empreinte carbone"
-* "de l'individu, vers le global"
-[v] Empreinte domicile travail : à partir données 39% trajets voiture sont domicile travail cf (https://hal.archives-ouvertes.fr/hal-00546282/document) <-- personnalisation !
+[v] texte introductifs, "c'est quoi l'empreinte carbone"
+[v] "de l'individu, vers le global"
 * barre vous (à la place de "un français")// % personnalisation <=> kgCO2 ref "ignorés"
-* Fluides : chauffage + eau chaude individuelle --> cf kWh facture elec / gaz.
-  sinon, elec + gaz : + valeur moyenne pour la quote part chauffage + eau chaude.
+[v] objectifs pour aller vers objectif 2050 : graphe : objectif 2050 vs chacune des catégories de 2018.
+* Mise en ligne v0.2.0 sur env beta.
+
 * Centraliser données de "calcul" (elect to CO2, gaz To CO2, ...), avec label, reference, ...
 * Base de données "leviers" (chauffage, 10km voiture, ...)
 
-
-* équivalence objectif, par catégories.
-* Personnalisation résultat transport
-* Personnalisation résultat électricité / chauffage
-* Personnalisation résultat alimentation ... ?
 
 * Questionnaire
   [poc] Transports pour le travail

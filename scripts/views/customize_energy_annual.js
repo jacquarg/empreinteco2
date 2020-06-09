@@ -1,7 +1,8 @@
 Vue.component('customize-energy-annual', {
   template: `
     <div>
-      <p>Consommation du logement</p>
+      <p>Et vous ? Comment consommez-vous au foyer ?</p>
+
       Nombre de personnes dans le foyer
       <input class="form-control" type="number" placeholder="2" v-model="familySize">
 
@@ -21,18 +22,20 @@ Vue.component('customize-energy-annual', {
     </div>`,
   data: function() {
     return {
-      familySize: 1,
-      electricityAnnual: 830,
-      gazAnnual: 0,
-      individualHeat: true,
-      individualHotWatter: true,
+      familySize: undefined,
+      electricityAnnual: 2600,
+      gazAnnual: 1200,
+      individualHeat: false,
+      individualHotWatter: false,
       usrData,
     }
   },
   computed: {
     usr: function() {
-      setHomeEnergy(this.familySize, this.electricityAnnual, this.gazAnnual, this.individualHeat, this.individualHotWatter, this.usrData)
-      return computeTotal(refData.logement.fluides, this.usrData.logement.fluides)
+      if (this.familySize) {
+        setHomeEnergy(this.familySize, this.electricityAnnual, this.gazAnnual, this.individualHeat, this.individualHotWatter, this.usrData)
+        return computeTotal(refData.logement.fluides, this.usrData.logement.fluides)
+      }
     }
   }
 })
