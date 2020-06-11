@@ -11,6 +11,7 @@ Vue.component('plotly-graph', {
       immediate: true,
       handler: function(d) {
         const id = this.randomId
+        // If there is only one curve, accept object, instead of [object]
         if (!Array.isArray(d)) {
           d = [d]
         }

@@ -7,12 +7,22 @@ Vue.component('graph-categories', {
       var display = {
         labels: Object.keys(categories).sort(), //res.map(it => it[0]),
         //values: Object.keysres.map(it => it[1]),
+        // marker: { colors: [
+        //   '#264653ff',
+        //   '#2a9d8fff',
+        //   '#e9c46aff',
+        //   '#f4a261ff',
+        //   '#e76f51ff',
+        // ] },
         type: "pie",
         textinfo: "label+value",
         textposition: "inside",
       }
       display.values = display.labels.map(it => categories[it])
-        return display
+      display.marker = {
+        colors: display.labels.map(it => category2Color(it))
       }
+      return display
+    }
   }
 })

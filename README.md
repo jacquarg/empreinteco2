@@ -3,7 +3,7 @@
 # TODO
 * Page à propos / dispositions légales (update)
 * Solution tracking visites.
-* couleurs par catégories
+[v] couleurs par catégories
 [v] texte introductifs, "c'est quoi l'empreinte carbone"
 [v] "de l'individu, vers le global"
 * barre vous (à la place de "un français")// % personnalisation <=> kgCO2 ref "ignorés"

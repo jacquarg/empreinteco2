@@ -17,7 +17,10 @@ Vue.component('graph-main-categories', {
         textposition: "inside",
       }
       display.values = display.labels.map(it => categories[it])
-        return display
+      display.marker = {
+        colors: display.labels.map(it => category2Color(it))
+      }
+      return display
     }
   }
 })
