@@ -6,8 +6,13 @@
 [v] couleurs par catégories
 [v] texte introductifs, "c'est quoi l'empreinte carbone"
 [v] "de l'individu, vers le global"
-* barre vous (à la place de "un français")// % personnalisation <=> kgCO2 ref "ignorés"
+[v] barre vous (à la place de "un français")// % personnalisation <=> kgCO2 ref "ignorés"
 [v] objectifs pour aller vers objectif 2050 : graphe : objectif 2050 vs chacune des catégories de 2018.
+* UI:
+  [v] changer titres des graphs vers titre de graphiques (écrire plus petit)
+  [v] Titre par catégorie, centré
+  [v] rationalisation margin
+  * couleurs sur objectifs.
 * Mise en ligne v0.2.0 sur env beta.
 
 * Centraliser données de "calcul" (elect to CO2, gaz To CO2, ...), avec label, reference, ...

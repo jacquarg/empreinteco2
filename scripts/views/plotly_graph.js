@@ -1,5 +1,5 @@
 Vue.component('plotly-graph', {
-  template: '<div v-bind:id="randomId" style="width: 330px;height: 330px;margin: auto;" ></div>',
+  template: '<div v-bind:id="randomId" style="width: 290px;height: 290px;margin: auto;" ></div>',
   data: function() {
     return {
       randomId: "a" + Math.floor(Math.random() * 10000)
@@ -19,8 +19,8 @@ Vue.component('plotly-graph', {
           Plotly.newPlot(id, d,
             {
               showlegend: false,
-              height: 330,
-              width: 330,
+              height: 290,
+              width: 290,
               margin:  {"t": 0, "b": 0, "l": 0, "r": 0},
             },
             {

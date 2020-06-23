@@ -1,6 +1,6 @@
 Vue.component('graph-main-categories', {
   template:
-  '<div><h4 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Répartition par postes <span style="font-size: 50%;">(kg éqCO2)</span></h4><plotly-graph v-bind:plotData="plotData"></plotly-graph></div>',
+  '<div><h5 style="margin-bottom: 15px; text-align: center;">Empreinte carbone par postes<br>  <span style="font-size: 75%;">kgCO2e anuels, par individu</span></h5><plotly-graph v-bind:plotData="plotData"></plotly-graph></div>',
   data: function() {
     return {
       usrData,

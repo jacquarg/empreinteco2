@@ -1,7 +1,8 @@
 Vue.component('my-carbon-footprint', {
   template: `
-    <div>
-      Mon empreinte carbone : {{ myFootPrint }}
+    <div class="p-3" style="background: #264653;
+color: white;">
+      Mon empreinte carbone : {{ myFootPrint }} kgCO2e
       <br>
       Personalisation : {{ personalizationRate }}%
     </div>`,

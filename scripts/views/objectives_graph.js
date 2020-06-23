@@ -1,6 +1,6 @@
 Vue.component('graph-objectives', {
   template:
-  `<div><h4 style="margin-bottom: 15px; margin-top: 60px; text-align: center;">Mon empreinte Carbone annuelle <span style="font-size: 50%;">(kg éqCO2)</span></h4>
+  `<div><h5 style="margin-bottom: 15px; text-align: center;">Objectifs <br><span style="font-size: 75%;">kgCO2e annuels, par individu</span></h5>
   <plotly-graph  v-bind:plotData="plotData"></plotly-graph>
   </div>`,
   data: function() {
@@ -31,8 +31,18 @@ Vue.component('graph-objectives', {
           text: labels,
           //textposition: 'auto',
           textposition: "inside",
-          type: 'bar'
+          type: 'bar',
+          marker: {
+            color: [
+              category2Color('transports'),
+              category2Color('servicePublicsSante'),
+              category2Color('alimentation'),
+              category2Color('logement'),
+            ]
+          },
       }
+
+
       return barPlot
     }
   }

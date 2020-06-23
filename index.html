@@ -6,6 +6,12 @@
      <title>Empreinte CO2</title>
 
     <link rel="stylesheet" href="./styles/vendors/bootstrap.min.css" >
+    <style>
+      .category-title {
+        margin-top: 5rem;
+        margin-bottom: 2rem;
+      }
+    </style>
     <script src="./scripts/vendors/jquery-3.4.0.min.js"></script>
     <script src="./scripts/vendors/bootstrap.bundle.min.js"></script>
     <script src="./scripts/vendors/plotly-latest.min.js"></script>
@@ -27,34 +33,31 @@
     <script src="./scripts/views/my_carbon_footprint.js"></script>
   </head>
 <body>
-
   <div class="container-sm" id="app">
-    <div class="row">
+    <div class="row my-4">
+      <div class="col-12 my-3">
+        <h1 class="text-center category-title">Mon empreinte carbone, quezako ?</h1>
+      </div>
       <div class="col-md-6">
-        <h2>Mon empreinte carbone, quezako</h2>
         <p>Mon empreinte carbone annuelle, c'est la quantité de gaz à effet de serre que j'ai émise au cours d'une année.
         Il y a certe le CO2 qu'on émet directement en expirant (~300 kgéqCO2 par an), mais c'est notre mode de vie qui est responsable des quantités les plus importants (cf graph à côté)</p>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 my-3">
         <graph-main-categories></graph-main-categories>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 mt-2">
         <p>Ces valeurs d'émissions annuelles de kg d'équivalent CO2 sont la moyenne par français.
           Se déplacer émet plus de carbone que se nourrir. Chacune des catégories est détaillée ci-dessous.
-          Commencer à les personnaliser avec quelques questions, et ainsi découvrir si vous êtes plus ou moins émetteur que la moyenne !
+          Commencez à les personnaliser avec quelques questions, et ainsi découvrir si vous êtes plus ou moins émetteur que la moyenne !
         </p>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
-        <my-carbon-footprint></my-carbon-footprint>
+    <div class="row my-4">
+      <div class="col-12">
+        <h2 class="text-center category-title">Transports</h3>
       </div>
-
-    </div>
-
-    <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 my-3">
         <graph-categories v-bind:item="subItems[0]"></graph-categories>
       </div>
       <div class="col-md-6">
@@ -64,8 +67,11 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
+    <div class="row my-4">
+      <div class="col-12">
+        <h2 class="text-center category-title">Logement</h3>
+      </div>
+      <div class="col-md-6 my-3">
         <graph-categories v-bind:item="subItems[1]"></graph-categories>
       </div>
       <div class="col-md-6">
@@ -76,8 +82,11 @@
         <customize-energy-annual></customize-energy-annual>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-6">
+    <div class="row my-4">
+      <div class="col-12">
+        <h2 class="text-center category-title">Biens</h3>
+      </div>
+      <div class="col-md-6 my-3">
         <graph-categories v-bind:item="subItems[2]"></graph-categories>
       </div>
       <div class="col-md-6">
@@ -87,8 +96,11 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-md-6">
+    <div class="row my-4">
+      <div class="col-12">
+        <h2 class="text-center category-title">Alimentation</h3>
+      </div>
+      <div class="col-md-6 my-3">
         <graph-categories v-bind:item="subItems[3]"></graph-categories>
       </div>
       <div class="col-md-6">
@@ -99,18 +111,20 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row my-4">
+      <div class="col-12">
+        <h2 class="text-center category-title">Objectif 2050</h3>
+      </div>
       <div class="col-md-6">
-        <h2>Réduire mon empreinte carbone, pourquoi ?</h2>
         <p>Depuis près de 40 ans, des scientifiques alertent sur un réchaffement global sur terre, causé par l'augementation des gaz à effet de serre dans l'atmosphère. Ceci finit par amener la comunauté international à se fixer des objectif de diminution des émissions de gaz à effet de serre.</p>
         <p>En France, la Stratégie Nationale Bas-Carbone (SNBC) fixe l'objectif de la neutralité carbone en 2050, qui se traduit par 2TCO2e d'émission par individu en 2050. C'est 6 fois moins qu'en 2018 ! Pour avancer vers cet objectif, il faut émettre moins de 11400kgCO2e en 2020. Où en êtes-vous ?</p>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 my-3">
         <graph-objectives></graph-objectives>
       </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-4 mb-5">
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <h5 style="margin-top: 100px;">Source des données</h5>
@@ -127,6 +141,12 @@
       </div>
       <div class="col-md-2"></div>
     </div>
+
+    <div class="fixed-bottom mx-auto" style="width: 330px;">
+     <!-- position: absolute; bottom: 0px; left: 50%; margin-left: -125px;" -->
+        <my-carbon-footprint></my-carbon-footprint>
+    </div>
+
   </div>
 
   <script>
