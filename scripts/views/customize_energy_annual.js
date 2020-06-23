@@ -1,6 +1,7 @@
 Vue.component('customize-energy-annual', {
   template: `
     <div>
+    <h5>Personalisation</h5>
       <p>Et vous ? Comment consommez-vous au foyer ?</p>
 
       Nombre de personnes dans le foyer
@@ -12,12 +13,15 @@ Vue.component('customize-energy-annual', {
       Consommation de Gaz annuelle (kWh)
       <input class="form-control" type="number" placeholder="2" v-model="gazAnnual">
 
-      Chauffage individuel électricité ou gaz
-      <input class="form-check-input" type="checkbox" v-model="individualHeat">
+      <div class="form-check">
+      <input class="form-check-input" type="checkbox" v-model="individualHeat" id="individualHeat">
+      <label class="form-check-label" for="individualHeat">Chauffage individuel électricité ou gaz</label>
+      </div>
 
-      Eau chaude individuelle électricité ou gaz
+      <div class="form-check">
       <input class="form-check-input" type="checkbox" v-model="individualHotWatter">
-
+      <label class="form-check-label" for="individualHotWatter">Eau chaude individuelle électricité ou gaz</label>
+      </div>
       Mon total: {{ usr }}
     </div>`,
   data: function() {

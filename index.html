@@ -40,15 +40,15 @@
       </div>
       <div class="col-md-6">
         <p>Mon empreinte carbone annuelle, c'est la quantité de gaz à effet de serre que j'ai émise au cours d'une année.
-        Il y a certe le CO2 qu'on émet directement en expirant (~300 kgéqCO2 par an), mais c'est notre mode de vie qui est responsable des quantités les plus importants (cf graph à côté)</p>
+        Il y a certe le CO2 qu'on émet directement en expirant (~300 kgCO2e par an), mais c'est notre mode de vie qui est responsable des quantités les plus importantes (cf graph à côté)</p>
       </div>
       <div class="col-md-6 my-3">
         <graph-main-categories></graph-main-categories>
       </div>
       <div class="col-md-6 mt-2">
-        <p>Ces valeurs d'émissions annuelles de kg d'équivalent CO2 sont la moyenne par français.
-          Se déplacer émet plus de carbone que se nourrir. Chacune des catégories est détaillée ci-dessous.
-          Commencez à les personnaliser avec quelques questions, et ainsi découvrir si vous êtes plus ou moins émetteur que la moyenne !
+        <p>Ces valeurs d'émissions annuelles (en kilogrammes équivalent CO2 - kgCOe) sont la moyenne par français.
+          Se déplacer émet plus de carbone que se nourrir, est-ce bien ce que vous attendiez, ce que vous souhaitez ? Chacune des catégories est détaillée ci-dessous.
+          Commencez à les personnaliser avec quelques questions, et ainsi découvrez si vous êtes plus ou moins émetteur que la moyenne !
         </p>
       </div>
     </div>
@@ -61,7 +61,7 @@
         <graph-categories v-bind:item="subItems[0]"></graph-categories>
       </div>
       <div class="col-md-6">
-        <p>En moyenne, la voiture est le plus gros contributeur. Sur ce total de près de 2000 kgéqCO2, environ 400kg sont dûs à l'achat (c'est à dire la construction de la voiture) et 600kgéqCO2 aux trajets domicile travail.
+        <p>En moyenne, la voiture est le plus gros contributeur. Sur ce total de près de 2000 kgCO2e, environ 400kg sont dûs à l'achat (c'est à dire la construction de la voiture) et 600kgCO2e aux trajets domicile travail.
           L'avion est nettement second car beaucoup moins prisé des français. Les autres transports (transports en commun (métro, train de banlieu, ..), TGV, bateau, ...) compte pour moins de 5% de ce total.</p>
         <customize-work-home></customize-work-home>
       </div>
@@ -75,9 +75,9 @@
         <graph-categories v-bind:item="subItems[1]"></graph-categories>
       </div>
       <div class="col-md-6">
-        <p>Au logement, c'est la consommation directe d'énergie qui est la plus émettrice de gaz à effet de serre. En France, le chauffage c'est plus de la moitié (60%) des l'énergie consommée au foyer.</p>
+        <p>Au logement, c'est la consommation directe d'énergie qui est la plus émettrice de gaz à effet de serre. En France, le chauffage c'est plus de la moitié (60%) de l'énergie consommée au foyer.</p>
         <p>
-          Du fait du nucléair et des énergies renouvelable, l'électricité émet seulement 37géqCO2/kWh contre 230 pour le gaz (qui ne comporte aujourd'hui que 5% de biogaz, quasiment neutre en émissions de carbone).
+          Du fait du nucléair et des énergies renouvelable, l'électricité émet seulement 37gCO2e/kWh contre 230 pour le gaz (qui ne comporte aujourd'hui que 5% de biogaz, quasiment neutre en émissions de carbone).
         </p>
         <customize-energy-annual></customize-energy-annual>
       </div>
@@ -90,7 +90,7 @@
         <graph-categories v-bind:item="subItems[2]"></graph-categories>
       </div>
       <div class="col-md-6">
-        <p>L'achat de nouveau bien compte pour plus du cinquième de nos émissions de gaz à effet de serre. TV, ordinateurs, smartphones, ... devenu des consommables ont un énorme impact. Ils représentent autant d'émissions de carbone que le chauffage au logement !
+        <p>L'achat de nouveau bien compte pour plus du cinquième de nos émissions de gaz à effet de serre. TV, ordinateurs, smartphones, ... devenus des consommables ont un énorme impact. Ils représentent autant d'émissions de carbone que le chauffage au logement !
         L'habillement, par son volume est aussi un très gros contributeur.</p>
         <p>Les usages numériques, souvent pointé du doigt restent faible : moins de 1% des émissions annuelles. Cependant, c'est beaucoup plus que les émissions de transports en commun !</p>
       </div>
@@ -104,8 +104,8 @@
         <graph-categories v-bind:item="subItems[3]"></graph-categories>
       </div>
       <div class="col-md-6">
-        <p>Réduire l'empreinte carbone de son alimentation, ça veut dire s'arrêter de manger ? Pas forcément. Les types d'aliments on des impacts très différents. Sans surprise, la viandes et toutes les resources que cela implique pour nourrir et faire grandir des animaux compte pour près de la moitié des émissions. </p>
-        <p>Les produits laitiers sont aussi de gros émetteurs, en raison du fort pouvoir d'effete de serre du méthane (émis par les prout de vache) et la chaîne logistique réfrigérée qu'implique le lait frais.</p>
+        <p>Réduire l'empreinte carbone de son alimentation, ça veut dire s'arrêter de manger ? Pas forcément. Les types d'aliments ont des impacts très différents. Sans surprise, la viande et toutes les resources que cela implique pour nourrir et faire grandir des animaux compte pour près de la moitié des émissions. </p>
+        <p>Les produits laitiers sont aussi de gros émetteurs, en raison du fort pouvoir d'effet de serre du méthane (émis par les prouts de vache) et la chaîne logistique réfrigérée qu'implique le lait frais.</p>
         <p>Un végan divisera rapidement son empreinte carbone, mais attention, un budha-bowl avocat, quinoa, graine de chia à fait un quart de tour de planète en avion !
         <!-- <customize-food-weekly></customize-food-weekly> -->
       </div>
