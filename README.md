@@ -12,7 +12,7 @@
   [v] changer titres des graphs vers titre de graphiques (écrire plus petit)
   [v] Titre par catégorie, centré
   [v] rationalisation margin
-  * couleurs sur objectifs.
+  [v] couleurs sur objectifs.
 * Mise en ligne v0.2.0 sur env beta.
 
 * Centraliser données de "calcul" (elect to CO2, gaz To CO2, ...), avec label, reference, ...
