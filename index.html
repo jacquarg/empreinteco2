@@ -32,6 +32,7 @@
     <script src="./scripts/views/customize_food_weekly.js"></script>
     <script src="./scripts/views/my_carbon_footprint.js"></script>
     <script src="./scripts/views/reference_popup.js"></script>
+    <script src="./scripts/views/references_list.js"></script>
   </head>
 <body>
   <div class="container-sm" id="app">
@@ -118,27 +119,22 @@
       </div>
       <div class="col-md-6">
         <p>Depuis près de 40 ans, des scientifiques alertent sur un réchaffement global sur terre, causé par l'augementation des gaz à effet de serre dans l'atmosphère. Ceci finit par amener la comunauté international à se fixer des objectif de diminution des émissions de gaz à effet de serre.</p>
-        <p>En France, la Stratégie Nationale Bas-Carbone (SNBC) fixe l'objectif de la neutralité carbone en 2050, qui se traduit par 2TCO2e d'émission par individu en 2050. C'est 6 fois moins qu'en 2018 ! Pour avancer vers cet objectif, il faut émettre moins de 11400kgCO2e en 2020. Où en êtes-vous ?</p>
+        <p>En France, la Stratégie Nationale Bas-Carbone (SNBC) fixe l'objectif de la neutralité carbone en 2050, qui se traduit par 2TCO2e<reference-popup reference-id="frenchObjectiv2050ByIndividual"></reference-popup> d'émission par individu en 2050. C'est 6 fois moins qu'en 2018 ! Pour avancer vers cet objectif, il faut émettre moins de 11400kgCO2e en 2020. Où en êtes-vous ?</p>
       </div>
       <div class="col-md-6 my-3">
         <graph-objectives></graph-objectives>
       </div>
     </div>
 
-    <div class="row mt-4 mb-5">
+    <div class="row mt-4 mb-5" style="margin-top: 100px;">
       <div class="col-md-2"></div>
       <div class="col-md-8">
-        <h5 style="margin-top: 100px;">Source des données</h5>
-
+        <references-list></references-list>
         <!-- TODO FAQ :
         * empreinte carbone VS bilan carbone.
         * kgEqCO2, méthane, ...
         * http://www.carbone4.com/wp-content/uploads/2019/06/Publication-Carbone-4-Faire-sa-part-pouvoir-responsabilite-climat.pdf
       -->
-        <ul>
-          <li>Empreinte Carbone par poste de dépense des français reprise du post <a href="http://ravijen.fr/?p=440#rjb14">L’empreinte carbone des français, un sujet tabou ?</a> du blog Ravijen.</li>
-          <li>Objectif 2 tonnes équivalent CO2 : <i>"[La France, avec] sa stratégie nationale bas carbone (SNBC) a un objectif de facteur 4 en 2050, soit une division par 4 des émissions entre 1990 et 2050 pour atteindre des émissions de 140 Mt d'équivalent CO2."</i>. Il s'agit cependant ici du bilan carbone de la France (émissions - captation naturel du territoire, ~7 tonnes équivalent CO2 par habitant) et non de l'empreinte carbone des français (~12 tonnes équivalent CO2). Cet objectif de 140MT et donc 2 Tonnes par habitant reste donc ouvert à débat. <a href="https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France">Wikipedia : Neutralité Carbone</a></li>
-        </ul>
       </div>
       <div class="col-md-2"></div>
     </div>

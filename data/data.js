@@ -11,6 +11,22 @@
 // }
 
 var jsonld = {
+  footprintByCategories: {
+    value: NaN,
+    label: "empreinte carbone annuelle moyenne d'un français par poste",
+    description: "Empreinte Carbone par poste de dépense des français reprise du post L’empreinte carbone des français, un sujet tabou ? du blog Ravijen.",
+    source: "http://ravijen.fr/?p=440#rjb14",
+    unit: "kgCO2e",
+  },
+
+  frenchObjectiv2050ByIndividual: {
+    value: 2000,
+    label: "objectif 2050 d'émissions par individu en France",
+    description: `"[La France, avec] sa stratégie nationale bas carbone (SNBC) a un objectif de facteur 4 en 2050, soit une division par 4 des émissions entre 1990 et 2050 pour atteindre des émissions de 140 Mt d'équivalent CO2.". Il s'agit cependant ici du bilan carbone de la France (émissions - captation naturel du territoire, ~7 tonnes équivalent CO2 par habitant) et non de l'empreinte carbone des français (~12 tonnes équivalent CO2). Cet objectif de 140MT et donc 2 Tonnes par habitant reste donc ouvert à débat.`,
+    source: "https://fr.wikipedia.org/wiki/Neutralit%C3%A9_carbone#France",
+    unit: "kgCO2e",
+  },
+
   humanRespirationFootprint: {
     value: 360,
     label: "empreinte carbone annuelle de la respiration d'un humain",
@@ -66,5 +82,21 @@ partBioGaz: {
   source: "TODO",
   unit: "%",
 },
+
+cooByKilometers: {
+  value: 0.14,
+  label: "empreinte moyenne de la voiture au km",
+  description: "Empreinte carbone moyenne d'un véhicule particulier par kilomètres parcourus.",
+  source: "TODO",
+  unit: "kgCO2e/km",
+},
+
+workingDayByYear: {
+  value: 215,
+  label: "nombre de jour travaillé par an",
+  description: "Nombre de jour travaillé par an, pour un temps plein typique.",
+  unit: "j",
+  source: "TODO",
+}
 
 }

@@ -2,18 +2,20 @@
 
 # TODO
 
-* Centraliser données de "calcul" (elect to CO2, gaz To CO2, ...), structure:
-  * id
-  * value
-  * unit
-  * label
-  * description
-  * source (?)
-, avec label, reference, ...
+## v0.3
+* revue UX
 * Page à propos / dispositions légales (update)
 * Solution tracking visites.
-*
+
+
+## Next
+
+* proposer un event dans l'agenda
+* repenser pour un usage mensuel
+
+...
 * Base de données "leviers" (chauffage, 10km voiture, ...)
+
 
 
 * Questionnaire

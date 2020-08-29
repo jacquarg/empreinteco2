@@ -1,3 +1,96 @@
+const useReference = (referenceId) => {
+  if (!globalData.referencesUsed.includes(referenceId)) {
+    globalData.referencesUsed.push(referenceId)
+  }
+}
+
+const usedReferences = () => {
+  return globalData.referencesUsed.map(getReference)
+}
+
+const getReference = (referenceId) => {
+  if (!globalData.referencesUsed.includes(referenceId)) {
+    globalData.referencesUsed.push(referenceId)
+  }
+  return jsonld[referenceId]
+}
+
+// Initialization //////////////////////////////////////////////////////////////
+// prepareData(refData)
+// computeCategories(refData.transports)
+// computeCategories(refData.logement)
+// computeCategories(refData.biens)
+// computeCategories(refData.alimentation)
+
+const globalData = {
+  referencesUsed: ["footprintByCategories"]
+}
+
+const usrData = {
+  alimentation: {
+    // boissons: {
+    //   boissonsAlcoolisees: 145,
+    //   boissonsSansAlcool: 118,
+    // },
+    autresAliments: { usr: 0, ref: 0 },
+    // (Fruits et légumes, féculents plats élaborés,  condiments, etc )
+
+  // Produits laitiers et œufs			408 kg
+    cremerie: {
+      lait:  { usr: 0, ref: 0 },
+      yaourt: { usr: 0, ref: 0 },
+      fromage:  { usr: 0, ref: 0 },
+      beurre:  { usr: 0, ref: 0 },
+      oeuf:  { usr: 0, ref: 0 },
+    },
+    viandes: {
+      poissons:  { usr: 0, ref: 0 },
+      ruminants:  { usr: 0, ref: 0 },
+      porc:  { usr: 0, ref: 0 },
+      volailles:  { usr: 0, ref: 0 },
+      autresViandes:  { usr: 0, ref: 0 },
+    },
+  },
+
+  logement: {
+    fluides: {
+      gaz: {
+        usr: 0,
+        ref: 0
+      },
+      pp: {
+        usr: 0,
+        ref: 0
+      },
+      specifique: {
+        usr: 0,
+        ref: 0
+      },
+      electricite: {
+        usr: 40,
+        ref: 0
+      },
+      reseauChaleur: {
+        usr: 0,
+        ref: 0
+      },
+      eauDechets: {
+        usr: 0,
+        ref: 0
+      },
+    },
+  },
+  transports: {
+     voiture: {
+       voitureUsage: {
+         usr: 0,
+         ref: 0
+       }
+     }
+   },
+}
+
+
 // Private ////////////////////////////////////////////////////////////////////
 const computeTotal = (root, usrData) => {
   return Object.keys(root).reduce((agg, key) => {
@@ -69,28 +162,24 @@ const computeCategory = (cat) => {
 }
 
 const workHomeCarFrenchies = () => {
-  // TODO: add this const to a data object.
-  const workHomePart = 0.39
+  const workHomePart = getReference('workHomePart').value
   return Math.round(refData.transports.voiture.voitureUsage * workHomePart)
 }
 
 const workHomeByMorningDistance = (morningDistance) => {
-  // TODO: add this const to a data object, with  source
-  const workingDays = 215
-  const cooByKilometers = 0.14
-  const totalDistance = 215 * morningDistance * 2
-  return Math.round(totalDistance * cooByKilometers)
+  const totalDistance = getReference('workingDayByYear').value * morningDistance * 2
+  return Math.round(totalDistance * getReference('cooByKilometers').value)
 }
 
 // https://bilan-electrique-2018.rte-france.com/emissions-de-co2/# ~> 37gCO2/kWh
 const elecToCO2 = (eleckWh) => {
-  return Math.round(eleckWh * 0.037)
+  return Math.round(eleckWh * getReference('electricityFootprint').value)
 }
 
 // http://www.energies-avenir.fr/page/emissions-de-co-small-2-small-16
 // TODO: 230g/kWh
 const gazToCO2 = (gazkWh) => {
-  return Math.round(gazkWh * 0.230)
+  return Math.round(gazkWh * getReference('gazFootprint').value)
 }
 
 const electricityFootPrint = (elecEnergy, homeCount) => {
@@ -103,7 +192,7 @@ const gazFootPrint = (gazEnergy, homeCount) => {
 
 
 // Public API /////////////////////////////////////////////////////////////////
-const objectiv2050 = 2000
+const objectiv2050 = getReference('frenchObjectiv2050ByIndividual').value
 
 // Obj = -5/16 * (year - 2018) + 12
 // baisse de 300kg par an.
@@ -133,10 +222,10 @@ const setHomeEnergy = (homeCount, elecEnergy, gazEnergy, individualHeat, individ
   var personalizedPart = 0.07 + 0.17
 
   if (individualHeat) {
-    personalizedPart += 0.62
+    personalizedPart += getReference('individualHeatPart').value
   }
   if (individualHotWatter) {
-    personalizedPart += 0.14
+    personalizedPart += getReference('individualHotWatterPart').value
   }
   const usrFluides = usrData.logement.fluides
   const refFluides = refData.logement.fluides
@@ -218,78 +307,4 @@ const personalizationRate = (usrData) => {
   const total = computeTotal(refData, {})
 
   return Math.round(100 * ref / total)
-}
-
-
-
-
-// Initialization //////////////////////////////////////////////////////////////
-// prepareData(refData)
-// computeCategories(refData.transports)
-// computeCategories(refData.logement)
-// computeCategories(refData.biens)
-// computeCategories(refData.alimentation)
-
-const usrData = {
-  alimentation: {
-    // boissons: {
-    //   boissonsAlcoolisees: 145,
-    //   boissonsSansAlcool: 118,
-    // },
-    autresAliments: { usr: 0, ref: 0 },
-    // (Fruits et légumes, féculents plats élaborés,  condiments, etc )
-
-  // Produits laitiers et œufs			408 kg
-    cremerie: {
-      lait:  { usr: 0, ref: 0 },
-      yaourt: { usr: 0, ref: 0 },
-      fromage:  { usr: 0, ref: 0 },
-      beurre:  { usr: 0, ref: 0 },
-      oeuf:  { usr: 0, ref: 0 },
-    },
-    viandes: {
-      poissons:  { usr: 0, ref: 0 },
-      ruminants:  { usr: 0, ref: 0 },
-      porc:  { usr: 0, ref: 0 },
-      volailles:  { usr: 0, ref: 0 },
-      autresViandes:  { usr: 0, ref: 0 },
-    },
-  },
-
-  logement: {
-    fluides: {
-      gaz: {
-        usr: 0,
-        ref: 0
-      },
-      pp: {
-        usr: 0,
-        ref: 0
-      },
-      specifique: {
-        usr: 0,
-        ref: 0
-      },
-      electricite: {
-        usr: 40,
-        ref: 0
-      },
-      reseauChaleur: {
-        usr: 0,
-        ref: 0
-      },
-      eauDechets: {
-        usr: 0,
-        ref: 0
-      },
-    },
-  },
-  transports: {
-     voiture: {
-       voitureUsage: {
-         usr: 0,
-         ref: 0
-       }
-     }
-   },
 }
