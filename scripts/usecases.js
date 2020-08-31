@@ -1,18 +1,16 @@
-const useReference = (referenceId) => {
+const getReference = (referenceId) => {
   if (!globalData.referencesUsed.includes(referenceId)) {
     globalData.referencesUsed.push(referenceId)
   }
+  return jsonld[referenceId]
 }
 
 const usedReferences = () => {
   return globalData.referencesUsed.map(getReference)
 }
 
-const getReference = (referenceId) => {
-  if (!globalData.referencesUsed.includes(referenceId)) {
-    globalData.referencesUsed.push(referenceId)
-  }
-  return jsonld[referenceId]
+const getReferenceOrder = (referenceId) => {
+  return globalData.referencesUsed.indexOf(referenceId) + 1
 }
 
 // Initialization //////////////////////////////////////////////////////////////
