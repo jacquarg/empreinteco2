@@ -11,15 +11,7 @@ Vue.component('reference-popup',  {
   },
   mounted: function() {
     this.$nextTick(function () {
-      console.log(this)
-      console.log(this.$children)
       $(this.$el.firstChild).popover({ html: true })
     })
   },
 })
-
-// TODO
-// V call popover() "after render"
-// V make it work
-//* dynamic data
-// *

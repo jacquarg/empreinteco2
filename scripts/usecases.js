@@ -13,6 +13,23 @@ const getReferenceOrder = (referenceId) => {
   return globalData.referencesUsed.indexOf(referenceId) + 1
 }
 
+const setUsrValue = (elem, user, ref) => {
+  elem.usr = user
+  elem.ref = ref
+}
+
+const saveUsrResponses = (newData) => {
+    localStorage.setItem('userResponses', JSON.stringify(newData))
+}
+
+const loadUsrResponses = () => {
+  const savedData = JSON.parse(localStorage.getItem('userResponses'))
+
+  for (var attrname in savedData) {
+    usrResponses[attrname] = savedData[attrname]
+  }
+}
+
 // Initialization //////////////////////////////////////////////////////////////
 // prepareData(refData)
 // computeCategories(refData.transports)
@@ -87,6 +104,12 @@ const usrData = {
      }
    },
 }
+
+const usrResponses = {}
+
+loadUsrResponses()
+
+
 
 
 // Private ////////////////////////////////////////////////////////////////////
@@ -210,11 +233,16 @@ const totalFrenchies = (refData) => {
 const setWorkHomeByMorningDistance = (morningDistance, usrData) => {
   const usr = workHomeByMorningDistance(morningDistance)
   const ref = workHomeCarFrenchies()
-  usrData.transports.voiture.voitureUsage.usr = usr
-  usrData.transports.voiture.voitureUsage.ref = ref
+  setUsrValue(usrData.transports.voiture.voitureUsage, usr, ref)
 }
 
-const setHomeEnergy = (homeCount, elecEnergy, gazEnergy, individualHeat, individualHotWatter, usrData) => {
+const setHomeEnergy = (usrResponses, usrData) => {
+
+  const homeCount = usrResponses.homeCount
+  const elecEnergy = usrResponses.elecEnergy
+  const gazEnergy = usrResponses.gazEnergy
+  const individualHeat = usrResponses.individualHeat
+  const individualHotWatter = usrResponses.individualHotWatter
   //https://travaux.edf.fr/electricite/raccordement/repartition-de-la-consommation-d-electricite-au-sein-d-un-foyer-francais
 
   var personalizedPart = 0.07 + 0.17
@@ -228,15 +256,20 @@ const setHomeEnergy = (homeCount, elecEnergy, gazEnergy, individualHeat, individ
   const usrFluides = usrData.logement.fluides
   const refFluides = refData.logement.fluides
 
-  usrFluides.electricite.usr = electricityFootPrint(elecEnergy, homeCount)
-  usrFluides.electricite.ref = Math.round(refFluides.electricite * personalizedPart)
+  setUsrValue(usrFluides.electricite,
+    electricityFootPrint(elecEnergy, homeCount),
+    Math.round(refFluides.electricite * personalizedPart))
 
-  usrFluides.gaz.usr = gazFootPrint(gazEnergy, homeCount)
-  usrFluides.gaz.ref = Math.round(refFluides.gaz * personalizedPart)
+  setUsrValue(usrFluides.gaz.usr,
+    gazFootPrint(gazEnergy, homeCount),
+    Math.round(refFluides.gaz * personalizedPart))
 
-  usrFluides.pp.ref = Math.round(refFluides.pp * personalizedPart)
-  usrFluides.specifique.ref = Math.round(refFluides.specifique * personalizedPart)
-  usrFluides.reseauChaleur.ref = Math.round(refFluides.reseauChaleur * personalizedPart)
+  setUsrValue(usrFluides.pp, 0,
+    Math.round(refFluides.pp * personalizedPart))
+  setUsrValue(usrFluides.specifique, 0,
+    Math.round(refFluides.specifique * personalizedPart))
+  setUsrValue(usrFluides.reseauChaleur, 0,
+    Math.round(refFluides.reseauChaleur * personalizedPart))
 }
 
 const setFoodWeekly = (homeCount,

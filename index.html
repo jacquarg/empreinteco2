@@ -176,8 +176,19 @@
               refCategory: refData.alimentation,
               userCategory: usrData.alimentation,
             },
-          ]
+          ],
+          usrResponses,
+        },
+        watch: {
+          usrResponses: {
+            handler: function(newData) {
+              saveUsrResponses(newData)
+            },
+            deep: true
+          }
         }
+
+
     })
 
 

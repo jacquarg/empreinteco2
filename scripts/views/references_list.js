@@ -6,7 +6,7 @@ Vue.component('references-list', {
       <li v-for="item in items" >
         {{ item.label }} : {{ item.description }} <a :href="item.source" taget="_blank">source</a>
       </li>
-    </ul>
+    </ol>
   </div>
   `,
   data: function() {

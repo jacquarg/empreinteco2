@@ -2,7 +2,19 @@
 
 # TODO
 
-* why how, what + who
+* export / import donnée
+* event mensuel "Mon rendez vous empreinte"
+* remoteStorage
+
+
+* ajout évènement dans agenda ? --> fichier ICS + lien google.
+* revu "concurrences : wwf, ... les trucs ou on donne accès au relevé bancaire ..."
+* faire un listing de tous les leviers qu'il est possible de mettre en place facilement pour limiter mon empreinte carbone
+* recenser actions mesurables sur un mois.
+
+
+
+# why how, what + who
 
 * what :
   * qu'est-ce que l'empreinte carbone - le visiteur est déjà soucieux de son empreinte carbone
@@ -30,12 +42,6 @@
 * why
   * de l'écologie pragmatique et scientifique (plutôt que religieuse)
 
-
-
-* qui, quoi Comment
-* revu "concurrences : wwf, ... les trucs ou on donne accès au relevé bancaire ..."
-* faire un listing de tous les leviers qu'il est possible de mettre en place facilement pour limiter mon empreinte carbone
-* recenser actions mesurables sur un mois.
 
 
 ## Next

@@ -2,11 +2,11 @@ Vue.component('customize-work-home', {
   template: `
     <div>
     <h5>Personalisation</h5>
-      <p>En moyenne, les trajets domicile-travail représentent 39% <reference-popup reference-id="workHomePart"/> des déplacements en voiture des français. Soit {{ ref }} <span style="font-size: 75%;">(kgCO2e)</span>.
+      <p>En moyenne, les trajets domicile-travail représentent 39% <reference-popup des déplacements en voiture des français. Soit {{ ref }} <span style="font-size: 75%;">(kgCO2e)</span>.
       </p>
       <p>Et vous ? Quelle distance (km) parcourez-vous en voiture pour vous rendre à votre travail ?
       </p>
-      <input class="form-control" type="number" placeholder="10.04" v-model="usrDistance">
+      <input class="form-control" type="number" placeholder="10.04" v-model="usrResponses.usrDistance">
       <p>
         Sur un an, cela représente : {{ usr }}</span><span style="font-size: 75%;">kgCO2e</span>.
       </p>
@@ -15,13 +15,14 @@ Vue.component('customize-work-home', {
     return {
       usrData,
       ref: workHomeCarFrenchies(),
-      usrDistance: undefined,
+      //usrDistance: usrResponses.usrDistance,
+      usrResponses,
     }
   },
   computed: {
     usr: function() {
-      if (this.usrDistance) {
-        setWorkHomeByMorningDistance(this.usrDistance, this.usrData)
+      if (this.usrResponses.usrDistance) {
+        setWorkHomeByMorningDistance(this.usrResponses.usrDistance, this.usrData)
         return this.usrData.transports.voiture.voitureUsage.usr
       }
     }

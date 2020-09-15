@@ -5,39 +5,35 @@ Vue.component('customize-energy-annual', {
       <p>Et vous ? Comment consommez-vous au foyer ?</p>
 
       Nombre de personnes dans le foyer
-      <input class="form-control" type="number" placeholder="2" v-model="familySize">
+      <input class="form-control" type="number" placeholder="2" v-model="usrResponses.familySize">
 
       Consommation électrique annuelle (kWh)
-      <input class="form-control" type="number" placeholder="2" v-model="electricityAnnual">
+      <input class="form-control" type="number" placeholder="2600" v-model="usrResponses.electricityAnnual">
 
       Consommation de Gaz annuelle (kWh)
-      <input class="form-control" type="number" placeholder="2" v-model="gazAnnual">
+      <input class="form-control" type="number" placeholder="1200" v-model="usrResponses.gazAnnual">
 
       <div class="form-check">
-      <input class="form-check-input" type="checkbox" v-model="individualHeat" id="individualHeat">
+      <input class="form-check-input" type="checkbox" v-model="usrResponses.individualHeat" id="individualHeat">
       <label class="form-check-label" for="individualHeat">Chauffage individuel électricité ou gaz</label>
       </div>
 
       <div class="form-check">
-      <input class="form-check-input" type="checkbox" v-model="individualHotWatter">
+      <input class="form-check-input" type="checkbox" v-model="usrResponses.individualHotWatter">
       <label class="form-check-label" for="individualHotWatter">Eau chaude individuelle électricité ou gaz</label>
       </div>
       Mon total: {{ usr }}
     </div>`,
   data: function() {
     return {
-      familySize: undefined,
-      electricityAnnual: 2600,
-      gazAnnual: 1200,
-      individualHeat: false,
-      individualHotWatter: false,
+      usrResponses,
       usrData,
     }
   },
   computed: {
     usr: function() {
-      if (this.familySize) {
-        setHomeEnergy(this.familySize, this.electricityAnnual, this.gazAnnual, this.individualHeat, this.individualHotWatter, this.usrData)
+      if (this.usrResponses) {
+        setHomeEnergy(this.usrResponses, this.usrData)
         return computeTotal(refData.logement.fluides, this.usrData.logement.fluides)
       }
     }
