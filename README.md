@@ -2,7 +2,6 @@
 
 # TODO
 
-* export / import donnée
 * event mensuel "Mon rendez vous empreinte"
 * remoteStorage
 

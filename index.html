@@ -33,6 +33,8 @@
     <script src="./scripts/views/my_carbon_footprint.js"></script>
     <script src="./scripts/views/reference_popup.js"></script>
     <script src="./scripts/views/references_list.js"></script>
+    <script src="./scripts/views/manage_data.js"></script>
+
   </head>
 <body>
   <div class="container-sm" id="app">
@@ -127,6 +129,14 @@
       </div>
     </div>
 
+    <div class="row mt-5">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <manage-data></manage-data>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+
     <div class="row mt-5" style="margin-bottom: 100px;">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -178,6 +188,9 @@
             },
           ],
           usrResponses,
+        },
+        beforeMount: function() {
+          loadUsrResponses(this.$set)
         },
         watch: {
           usrResponses: {

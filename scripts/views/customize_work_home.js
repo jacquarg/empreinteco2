@@ -21,10 +21,8 @@ Vue.component('customize-work-home', {
   },
   computed: {
     usr: function() {
-      if (this.usrResponses.usrDistance) {
-        setWorkHomeByMorningDistance(this.usrResponses.usrDistance, this.usrData)
-        return this.usrData.transports.voiture.voitureUsage.usr
-      }
+      setWorkHomeByMorningDistance(this.usrResponses.usrDistance, this.usrData)
+      return this.usrData.transports.voiture.voitureUsage.usr
     }
   }
 })

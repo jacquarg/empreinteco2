@@ -32,10 +32,8 @@ Vue.component('customize-energy-annual', {
   },
   computed: {
     usr: function() {
-      if (this.usrResponses) {
-        setHomeEnergy(this.usrResponses, this.usrData)
-        return computeTotal(refData.logement.fluides, this.usrData.logement.fluides)
-      }
+      setHomeEnergy(this.usrResponses, this.usrData)
+      return computeTotal(refData.logement.fluides, this.usrData.logement.fluides)
     }
   }
 })

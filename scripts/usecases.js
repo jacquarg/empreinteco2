@@ -22,11 +22,25 @@ const saveUsrResponses = (newData) => {
     localStorage.setItem('userResponses', JSON.stringify(newData))
 }
 
-const loadUsrResponses = () => {
+const loadUsrResponses = (setter) => {
   const savedData = JSON.parse(localStorage.getItem('userResponses'))
 
   for (var attrname in savedData) {
-    usrResponses[attrname] = savedData[attrname]
+    setter(usrResponses, attrname, savedData[attrname])
+  }
+}
+
+const usrResponsesAsDataUri = () => {
+  const dataUri = 'data:application/json;charset=utf-8,'
+    + encodeURIComponent(localStorage.getItem('userResponses'))
+
+  return dataUri
+}
+
+const resetUsrResponses = (setter) => {
+  saveUsrResponses({})
+  for (var attrname in usrResponses) {
+    setter(usrResponses, attrname, undefined)
   }
 }
 
@@ -106,9 +120,6 @@ const usrData = {
 }
 
 const usrResponses = {}
-
-loadUsrResponses()
-
 
 
 
@@ -231,19 +242,34 @@ const totalFrenchies = (refData) => {
 
 
 const setWorkHomeByMorningDistance = (morningDistance, usrData) => {
-  const usr = workHomeByMorningDistance(morningDistance)
-  const ref = workHomeCarFrenchies()
-  setUsrValue(usrData.transports.voiture.voitureUsage, usr, ref)
+  if (morningDistance) {
+    const usr = workHomeByMorningDistance(morningDistance)
+    const ref = workHomeCarFrenchies()
+    setUsrValue(usrData.transports.voiture.voitureUsage, usr, ref)
+  } else {
+    setUsrValue(usrData.transports.voiture.voitureUsage, 0, 0)
+  }
 }
 
 const setHomeEnergy = (usrResponses, usrData) => {
-
-  const homeCount = usrResponses.homeCount
-  const elecEnergy = usrResponses.elecEnergy
-  const gazEnergy = usrResponses.gazEnergy
-  const individualHeat = usrResponses.individualHeat
-  const individualHotWatter = usrResponses.individualHotWatter
+  const homeCount = usrResponses.familySize
+  const elecEnergy = usrResponses.electricityAnnual
+  const gazEnergy = usrResponses.gazAnnual
+  const individualHeat = usrResponses.individualHeat || false
+  const individualHotWatter = usrResponses.individualHotWatter || false
   //https://travaux.edf.fr/electricite/raccordement/repartition-de-la-consommation-d-electricite-au-sein-d-un-foyer-francais
+
+  const usrFluides = usrData.logement.fluides
+  const refFluides = refData.logement.fluides
+
+  if (homeCount == undefined || elecEnergy == undefined || gazEnergy == undefined) {
+    setUsrValue(usrFluides.electricite, 0, 0)
+    setUsrValue(usrFluides.gaz, 0, 0)
+    setUsrValue(usrFluides.pp, 0, 0)
+    setUsrValue(usrFluides.specifique, 0, 0)
+    setUsrValue(usrFluides.reseauChaleur, 0, 0)
+    return
+  }
 
   var personalizedPart = 0.07 + 0.17
 
@@ -253,14 +279,13 @@ const setHomeEnergy = (usrResponses, usrData) => {
   if (individualHotWatter) {
     personalizedPart += getReference('individualHotWatterPart').value
   }
-  const usrFluides = usrData.logement.fluides
-  const refFluides = refData.logement.fluides
+
 
   setUsrValue(usrFluides.electricite,
     electricityFootPrint(elecEnergy, homeCount),
     Math.round(refFluides.electricite * personalizedPart))
 
-  setUsrValue(usrFluides.gaz.usr,
+  setUsrValue(usrFluides.gaz,
     gazFootPrint(gazEnergy, homeCount),
     Math.round(refFluides.gaz * personalizedPart))
 
