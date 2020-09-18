@@ -2,11 +2,10 @@
 
 # TODO
 
-* event mensuel "Mon rendez vous empreinte"
-* remoteStorage
+* remoteStorage as localStorage, bouton "caché" pour remote storage.
+* ajouter questionnaire mensuel avec index élec et gaz, et mise à jour "données annuelles".
 
 
-* ajout évènement dans agenda ? --> fichier ICS + lien google.
 * revu "concurrences : wwf, ... les trucs ou on donne accès au relevé bancaire ..."
 * faire un listing de tous les leviers qu'il est possible de mettre en place facilement pour limiter mon empreinte carbone
 * recenser actions mesurables sur un mois.

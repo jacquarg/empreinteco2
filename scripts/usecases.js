@@ -19,15 +19,24 @@ const setUsrValue = (elem, user, ref) => {
 }
 
 const saveUsrResponses = (newData) => {
-    localStorage.setItem('userResponses', JSON.stringify(newData))
+  remoteStorage.usrResponses.save(JSON.parse(JSON.stringify(usrResponses)))
+  .catch(console.error)
 }
 
 const loadUsrResponses = (setter) => {
-  const savedData = JSON.parse(localStorage.getItem('userResponses'))
+  remoteStorage.on('ready', function() {
+    remoteStorage.usrResponses.get()
+      .then((savedData) => {
+        console.log(savedData)
+        for (var attrname in savedData) {
+          setter(usrResponses, attrname, savedData[attrname])
+        }
+      })
+      .catch(console.error)
+  })
 
-  for (var attrname in savedData) {
-    setter(usrResponses, attrname, savedData[attrname])
-  }
+
+
 }
 
 const usrResponsesAsDataUri = () => {

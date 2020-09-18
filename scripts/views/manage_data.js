@@ -1,7 +1,10 @@
 Vue.component('manage-data', {
   template: `<div>
     <h5>Gérer mes données</h5>
-    <p>Toutes les données que vous renseignez dans cette application restent sur votre terminal. Si bien que, l'éditeur de l'application ne peut en aucun cas y avoir accès, mais aussi, vos données ne vous suivent pas quand vous changer de terminal (PC -> Smartphone par exemple).</p>
+    <p>Toutes les données que vous renseignez dans cette application restent sur votre terminal. Si bien que l'éditeur de l'application ne peut en aucun cas y avoir accès, mais aussi vos données ne vous suivent pas quand vous changer de terminal (PC -> Smartphone par exemple), a moins que vous soyez équipés en <a href="#remote-storage-container" v-on:click="showRemoteStorage">RemoteStorage</a>.</p>
+
+    <div id="remote-storage-container"></div>
+
     <p>Vous pouvez cependant télécharger les données que vous avez renseigné ci-dessous, pour les importer plus tard, ou les conserver, ou ...</p>
     <form>
     <div class="form-inline">
@@ -48,6 +51,15 @@ Vue.component('manage-data', {
        } catch (err) {
            console.error(err);
        }
-    }
+    },
+    showRemoteStorage: function(ev) {
+      if (!this.$el.querySelector('#remote-storage-container').firstChild) {
+        const widget = new Widget(remoteStorage)
+        widget.attach('remote-storage-container')
+      }
+    },
+  },
+  mounted: function() {
+    remoteStorage.on('connected', this.showRemoteStorage)
   }
 })
