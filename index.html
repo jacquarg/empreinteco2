@@ -37,12 +37,12 @@
     <script src="./scripts/views/objectives_graph.js"></script>
     <script src="./scripts/views/customize_work_home.js"></script>
     <script src="./scripts/views/customize_energy_annual.js"></script>
+    <script src="./scripts/views/electricity_index.js"></script>
     <script src="./scripts/views/customize_food_weekly.js"></script>
     <script src="./scripts/views/my_carbon_footprint.js"></script>
     <script src="./scripts/views/reference_popup.js"></script>
     <script src="./scripts/views/references_list.js"></script>
     <script src="./scripts/views/manage_data.js"></script>
-
   </head>
 <body>
   <div class="container-sm" id="app">
@@ -93,6 +93,9 @@
           Du fait du nucléair et des énergies renouvelable, l'électricité émet seulement 37gCO2e/kWh<reference-popup reference-id="electricityFootprint"></reference-popup> contre 230<reference-popup reference-id="gazFootprint"></reference-popup> pour le gaz (qui ne comporte aujourd'hui que 5% de biogaz<reference-popup reference-id="partBioGaz"></reference-popup>, quasiment neutre en émissions de carbone).
         </p>
         <customize-energy-annual></customize-energy-annual>
+      </div>
+      <div class="col-md-12">
+        <electricity-index></electricity-index>
       </div>
     </div>
     <div class="row my-4">

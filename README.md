@@ -2,8 +2,9 @@
 
 # TODO
 
-* remoteStorage as localStorage, bouton "caché" pour remote storage.
 * ajouter questionnaire mensuel avec index élec et gaz, et mise à jour "données annuelles".
+* interface générique d'édition des données brutes ?
+* s'appuyer sur Ademe.
 
 
 * revu "concurrences : wwf, ... les trucs ou on donne accès au relevé bancaire ..."

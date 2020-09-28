@@ -128,7 +128,9 @@ const usrData = {
    },
 }
 
-const usrResponses = {}
+const usrResponses = {
+  electricityIndexes: {},
+}
 
 
 
@@ -223,8 +225,25 @@ const gazToCO2 = (gazkWh) => {
   return Math.round(gazkWh * getReference('gazFootprint').value)
 }
 
-const electricityFootPrint = (elecEnergy, homeCount) => {
-  return elecToCO2(elecEnergy / homeCount)
+const electricityFootPrint = () => {
+  let total = usrResponses.electricityAnnual
+  // TODO: expect no data before start of this year !
+  const dates = Object.keys(usrResponses.electricityIndexes || []).sort()
+  if (dates.length >= 2) {
+    const first = dates[0]
+    const last = dates[dates.length - 1]
+
+    const duration = new Date(last) - new Date(first)
+    const part = duration / (365 * 24 * 3600 * 1000)
+console.log(part)
+console.log(total)
+    const fromIndex = usrResponses.electricityIndexes[last] - usrResponses.electricityIndexes[first]
+    total = total * (1 - part) + fromIndex
+
+    console.log(total)
+  }
+
+  return elecToCO2(total / usrResponses.familySize)
 }
 
 const gazFootPrint = (gazEnergy, homeCount) => {
@@ -304,6 +323,31 @@ const setHomeEnergy = (usrResponses, usrData) => {
     Math.round(refFluides.specifique * personalizedPart))
   setUsrValue(usrFluides.reseauChaleur, 0,
     Math.round(refFluides.reseauChaleur * personalizedPart))
+}
+
+const addElectricityIndex = (index, date, setter) => {
+  setter(usrResponses.electricityIndexes, date, index)
+}
+
+const averagePowerByIndexes = () => {
+  const indexes = usrResponses.electricityIndexes
+  const dates = Object.keys(indexes).sort()
+
+  return dates.reduce((agg, item, index) => {
+    if (index > 0) {
+      const previousItem = dates[index - 1]
+      //(seconds)
+      const duration = (new Date(item) - new Date(previousItem)) / 3600 / 1000
+      const energy = (indexes[item] - indexes[previousItem]) * 1000
+      const power = energy / duration
+      agg.push({
+        date: item,
+        power: power,
+      })
+    }
+    return agg
+  }, [])
+
 }
 
 const setFoodWeekly = (homeCount,

@@ -10,6 +10,12 @@ const UsrResponses = {
         gazAnnual: { type: 'string' },
         individualHeat: { type: 'boolean' },
         individualHotWatter: { type: 'boolean' },
+        electricityIndex: {
+          type: 'object',
+          properties: {
+            index: { type: 'string' }
+          }
+        },
       }
     })
 
