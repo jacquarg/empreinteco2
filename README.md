@@ -2,6 +2,17 @@
 
 # TODO
 
+* s'appuyer sur modèle carbone écolab : "https://github.com/betagouv/ecolab-data" ; https://github.com/laem/futureco-data/blob/master/co2.yaml
+* afficher empreinte carbone moyenne d'un français via publicodes
+* afficher graph catégories
+* afficher infobulles.
+
+
+
+* màj des contenus statiques avec ces nouvelles données
+* actions sur mes pires empreintes
+* podium "mes pires empreintes"
+* gestion "je reviens"...
 * ajouter questionnaire mensuel avec index élec et gaz, et mise à jour "données annuelles".
 * interface générique d'édition des données brutes ?
 * s'appuyer sur Ademe.
